@@ -1,0 +1,13 @@
+package: github.com/Bullpeen/quad
+import:
+- package: github.com/Sirupsen/logrus
+- package: github.com/jirwin/quadlek
+  subpackages:
+  - plugins/echo
+  - plugins/karma
+  - plugins/nextep
+  - plugins/random
+  - plugins/spotify
+  - plugins/twitter
+  - quadlek
+- package: github.com/urfave/cli
