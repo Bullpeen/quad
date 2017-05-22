@@ -94,7 +94,6 @@ func run(c *cli.Context) error {
 			"26786244":           "general",  // @schonstal
 			"770397982797602816": "general",  // @mosh_bot
 			"2317524115":         "general",  // @PHP_CEO
-			"2189503302":         "random",   // @nytminuscontext
 			"120252183":          "random",   // @fakescience
 		},
 	))
