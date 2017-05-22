@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build container
+          name: Build and deploy container
           command: |
             docker build -t build-img -f Dockerfile.build .
             docker run --rm -v $PWD/release:/build build-img
@@ -14,3 +14,4 @@ jobs:
             docker build -t quay.io/dosilek/quadlek:$TAG .
             docker login -u $DOCKER_USER -p $DOCKER_PASS quay.io
             docker push quay.io/dosilek/quadlek:$TAG
+            ssh circleci@quadlek.jirw.in 'sudo systemctl restart quadlek'
