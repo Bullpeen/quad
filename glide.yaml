@@ -11,3 +11,6 @@ import:
   - plugins/twitter
   - quadlek
 - package: github.com/urfave/cli
+- package: github.com/morgabra/cointip
+  subpackages:
+  - quadlek
