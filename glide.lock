@@ -37,6 +37,10 @@ imports:
   - plugins/spotify
   - plugins/twitter
   - quadlek
+- name: github.com/morgabra/cointip
+  version: d9a0663739d870b94b8b3873ba61733d2054a941
+  subpackages:
+  - quadlek
 - name: github.com/nlopes/slack
   version: 5bdec13b7f814e15f59a846bcbc2f64cd71f7888
 - name: github.com/purdyk/tvdb

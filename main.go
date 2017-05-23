@@ -14,6 +14,7 @@ import (
 	"github.com/jirwin/quadlek/plugins/spotify"
 	"github.com/jirwin/quadlek/plugins/twitter"
 	"github.com/jirwin/quadlek/quadlek"
+	cointip "github.com/morgabra/cointip/quadlek"
 
 	"github.com/urfave/cli"
 )
@@ -98,17 +99,17 @@ func run(c *cli.Context) error {
 		},
 	))
 
-	//coinbasePlugin := cointip.Register(
-	//	c.String("coinbase-key"),
-	//	c.String("coinbase-secret"),
-	//	c.String("coinbase-account"),
-	//)
-	//if coinbasePlugin != nil {
-	//	err = bot.RegisterPlugin(coinbasePlugin)
-	//	if err != nil {
-	//		panic(err)
-	//	}
-	//}
+	coinbasePlugin := cointip.Register(
+		c.String("coinbase-key"),
+		c.String("coinbase-secret"),
+		c.String("coinbase-account"),
+	)
+	if coinbasePlugin != nil {
+		err = bot.RegisterPlugin(coinbasePlugin)
+		if err != nil {
+			panic(err)
+		}
+	}
 
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
