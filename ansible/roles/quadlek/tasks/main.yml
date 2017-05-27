@@ -1,0 +1,12 @@
+- name: Create /opt/quadlek directory
+  file: path=/opt/quadlek state=directory owner=root group=root
+
+- name: Install Quadlek env file
+  template: src=quadlekEnv.j2 dest=/opt/quadlek/quadlekEnv mode=0755
+
+- name: Install Quadlek service unit
+  template: src=quadlek.service.j2 dest=/etc/systemd/system/quadlek.service mode=0755
+  notify: Reload systemd
+
+- name: Restart quadlek
+  service: name=quadlek enabled=yes state=restarted

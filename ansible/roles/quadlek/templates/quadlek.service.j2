@@ -1,0 +1,18 @@
+[Unit]
+Description=Quadlek
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker stop %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStartPre=/usr/bin/docker login -u dosilek+quadlekbuilder -p {{ quay_password }} quay.io
+ExecStartPre=/usr/bin/docker pull quay.io/dosilek/quadlek:master
+ExecStart=/usr/bin/docker run --rm -v /opt/quadlek:/opt/quadlek -p 127.0.0.1:8000:8000 --env-file /opt/quadlek/quadlekEnv --name %n quay.io/dosilek/quadlek:master
+
+Restart=always
+RestartSec=10
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target

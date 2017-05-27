@@ -1,0 +1,9 @@
+---
+
+- name: Install and configure quadlek
+  hosts: all
+  become: yes
+  vars_files:
+    - './quadlek-secrets.yml'
+  roles:
+    - quadlek
