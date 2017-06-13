@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 
+	cointip "github.com/Bullpeen/cointip/quadlek"
 	log "github.com/Sirupsen/logrus"
 	"github.com/jirwin/quadlek/plugins/echo"
 	"github.com/jirwin/quadlek/plugins/karma"
@@ -14,8 +15,8 @@ import (
 	"github.com/jirwin/quadlek/plugins/spotify"
 	"github.com/jirwin/quadlek/plugins/twitter"
 	"github.com/jirwin/quadlek/quadlek"
-	cointip "github.com/Bullpeen/cointip/quadlek"
 
+	"github.com/Bullpeen/infobot"
 	"github.com/urfave/cli"
 )
 
@@ -80,6 +81,12 @@ func run(c *cli.Context) error {
 			fmt.Printf("error registering nextep plugin: %s", err.Error())
 			return nil
 		}
+	}
+
+	err = bot.RegisterPlugin(infobot.Register())
+	if err != nil {
+		fmt.Printf("error registering infobot plugin: %s", err.Error())
+		return nil
 	}
 
 	err = bot.RegisterPlugin(twitter.Register(
