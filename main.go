@@ -14,7 +14,7 @@ import (
 	"github.com/jirwin/quadlek/plugins/spotify"
 	"github.com/jirwin/quadlek/plugins/twitter"
 	"github.com/jirwin/quadlek/quadlek"
-	cointip "github.com/morgabra/cointip/quadlek"
+	cointip "github.com/Bullpeen/cointip/quadlek"
 
 	"github.com/urfave/cli"
 )

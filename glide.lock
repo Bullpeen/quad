@@ -1,8 +1,12 @@
-hash: 1083f24502bf1c2bbbbf87b3c3531bee85cc712cbb1aba4cdb2fe8092246cfeb
-updated: 2017-05-21T08:17:25.543950692-07:00
+hash: add014a8287df66ff9425d8a54c8332817b3ccd27fdce55f06a1f1bb07be68c1
+updated: 2017-06-12T21:30:45.240158758-07:00
 imports:
 - name: github.com/boltdb/bolt
   version: 583e8937c61f1af6513608ccc75c97b6abdf4ff9
+- name: github.com/Bullpeen/cointip
+  version: 4c9e4561945fce2a093a25184c3a3439c98fcf37
+  subpackages:
+  - quadlek
 - name: github.com/cenkalti/backoff
   version: 5d150e7eec023ce7a124856b37c68e54b4050ac7
 - name: github.com/dghubble/go-twitter
@@ -28,7 +32,7 @@ imports:
 - name: github.com/gorilla/schema
   version: 1c72d033473165ade8a126ba64180d76a9212dcd
 - name: github.com/jirwin/quadlek
-  version: c7e7bcb48a6354d1e8e858efce71b1bba7c7952d
+  version: e1e9a8d37e5e0fadd7e3036d90658b765647fe41
   subpackages:
   - plugins/echo
   - plugins/karma
@@ -52,7 +56,7 @@ imports:
 - name: github.com/urfave/cli
   version: ab403a54a148f2d857920810291539e1f817ee7b
 - name: github.com/zmb3/spotify
-  version: 84bf5e353eaccd52f17bbbfdfd1accfc56361bb6
+  version: 9ad73bbd6efc68ade60e0c80ea3aa418611aaa51
 - name: golang.org/x/net
   version: da118f7b8e5954f39d0d2130ab35d4bf0e3cb344
   subpackages:

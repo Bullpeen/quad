@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"time"
 )
 
 // PlayerDevice contains information about a device that a user can play music on
@@ -62,6 +63,21 @@ type CurrentlyPlaying struct {
 	Item *FullTrack `json:"Item"`
 }
 
+type RecentlyPlayedItem struct {
+	// Track is the track information
+	Track SimpleTrack `json:"track"`
+
+	// PlayedAt is the time that this song was played
+	PlayedAt time.Time `json:"played_at"`
+
+	// PlaybackContext is the current playback context
+	PlaybackContext PlaybackContext `json:"context"`
+}
+
+type RecentlyPlayedResult struct {
+	Items []RecentlyPlayedItem `json:"items"`
+}
+
 // PlaybackOffset can be specified either by track URI OR Position. If both are present the
 // request will return 400 BAD REQUEST. If incorrect values are provided for position or uri,
 // the request may be accepted but with an unpredictable resulting action on playback.
@@ -87,23 +103,34 @@ type PlayOptions struct {
 	PlaybackOffset *PlaybackOffset `json:"offset,omitempty"`
 }
 
+// RecentlyPlayedOptions describes options for the recently-played request. All
+// fields are optional. Only one of `AfterEpochMs` and `BeforeEpochMs` may be
+// given. Note that it seems as if Spotify only remembers the fifty most-recent
+// tracks as of right now.
+type RecentlyPlayedOptions struct {
+	// Limit is the maximum number of items to return. Must be no greater than
+	// fifty.
+	Limit int
+
+	// AfterEpochMs is a Unix epoch in milliseconds that describes a time after
+	// which to return songs.
+	AfterEpochMs int
+
+	// BeforeEpochMs is a Unix epoch in milliseconds that describes a time
+	// before which to return songs.
+	BeforeEpochMs int
+}
+
 // PlayerDevices information about available devices for the current user.
 // This call requires authorization.
 //
 // Requires the ScopeUserReadPlaybackState scope in order to read information
 func (c *Client) PlayerDevices() ([]PlayerDevice, error) {
-	resp, err := c.http.Get(baseAddress + "me/player/devices")
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return nil, decodeError(resp.Body)
-	}
 	var result struct {
 		PlayerDevices []PlayerDevice `json:"devices"`
 	}
-	err = json.NewDecoder(resp.Body).Decode(&result)
+
+	err := c.get(baseAddress+"me/player/devices", &result)
 	if err != nil {
 		return nil, err
 	}
@@ -132,19 +159,14 @@ func (c *Client) PlayerStateOpt(opt *Options) (*PlayerState, error) {
 			spotifyURL += "?" + params
 		}
 	}
-	resp, err := c.http.Get(spotifyURL)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return nil, decodeError(resp.Body)
-	}
+
 	var result PlayerState
-	err = json.NewDecoder(resp.Body).Decode(&result)
+
+	err := c.get(spotifyURL, &result)
 	if err != nil {
 		return nil, err
 	}
+
 	return &result, nil
 }
 
@@ -157,8 +179,8 @@ func (c *Client) PlayerCurrentlyPlaying() (*CurrentlyPlaying, error) {
 	return c.PlayerCurrentlyPlayingOpt(nil)
 }
 
-// PlayerCurrentlyPlaying is like PlayerCurrentlyPlaying, but it accepts additional
-// options for sorting and filtering the results.
+// PlayerCurrentlyPlayingOpt is like PlayerCurrentlyPlaying, but it accepts
+// additional options for sorting and filtering the results.
 func (c *Client) PlayerCurrentlyPlayingOpt(opt *Options) (*CurrentlyPlaying, error) {
 	spotifyURL := baseAddress + "me/player/currently-playing"
 	if opt != nil {
@@ -170,20 +192,52 @@ func (c *Client) PlayerCurrentlyPlayingOpt(opt *Options) (*CurrentlyPlaying, err
 			spotifyURL += "?" + params
 		}
 	}
-	resp, err := c.http.Get(spotifyURL)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		return nil, decodeError(resp.Body)
-	}
+
 	var result CurrentlyPlaying
-	err = json.NewDecoder(resp.Body).Decode(&result)
+
+	err := c.get(spotifyURL, &result)
 	if err != nil {
 		return nil, err
 	}
+
 	return &result, nil
+}
+
+// PlayerRecentlyPlayed gets a list of recently-played tracks for the current
+// user. This call requires authorization.
+//
+// Requires the ScopeUserReadRecentlyPlayed.
+func (c *Client) PlayerRecentlyPlayed() ([]RecentlyPlayedItem, error) {
+	return c.PlayerRecentlyPlayedOpt(nil)
+}
+
+// PlayerRecentlyPlayedOpt is like PlayerRecentlyPlayed, but it accepts
+// additional options for sorting and filtering the results.
+func (c *Client) PlayerRecentlyPlayedOpt(opt *RecentlyPlayedOptions) ([]RecentlyPlayedItem, error) {
+	spotifyURL := baseAddress + "me/player/recently-played"
+	if opt != nil {
+		v := url.Values{}
+		if opt.Limit != 0 {
+			v.Set("limit", strconv.FormatInt(int64(opt.Limit), 10))
+		}
+		if opt.BeforeEpochMs != 0 {
+			v.Set("before", strconv.FormatInt(int64(opt.BeforeEpochMs), 10))
+		}
+		if opt.AfterEpochMs != 0 {
+			v.Set("after", strconv.FormatInt(int64(opt.AfterEpochMs), 10))
+		}
+		if params := v.Encode(); params != "" {
+			spotifyURL += "?" + params
+		}
+	}
+
+	result := RecentlyPlayedResult{}
+	err := c.get(spotifyURL, &result)
+	if err != nil {
+		return nil, err
+	}
+
+	return result.Items, nil
 }
 
 // TransferPlayback transfers playback to a new device and determine if
@@ -213,13 +267,11 @@ func (c *Client) TransferPlayback(deviceID ID, play bool) error {
 	if err != nil {
 		return err
 	}
-	resp, err := c.http.Do(req)
+	err = c.execute(req, nil, http.StatusNoContent)
 	if err != nil {
 		return err
 	}
-	if resp.StatusCode != http.StatusNoContent {
-		return decodeError(resp.Body)
-	}
+
 	return nil
 }
 
@@ -254,12 +306,9 @@ func (c *Client) PlayOpt(opt *PlayOptions) error {
 	if err != nil {
 		return err
 	}
-	resp, err := c.http.Do(req)
+	err = c.execute(req, nil, http.StatusNoContent)
 	if err != nil {
 		return err
-	}
-	if resp.StatusCode != http.StatusNoContent {
-		return decodeError(resp.Body)
 	}
 	return nil
 }
@@ -291,12 +340,9 @@ func (c *Client) PauseOpt(opt *PlayOptions) error {
 	if err != nil {
 		return err
 	}
-	resp, err := c.http.Do(req)
+	err = c.execute(req, nil, http.StatusNoContent)
 	if err != nil {
 		return err
-	}
-	if resp.StatusCode != http.StatusNoContent {
-		return decodeError(resp.Body)
 	}
 	return nil
 }
@@ -328,12 +374,9 @@ func (c *Client) NextOpt(opt *PlayOptions) error {
 	if err != nil {
 		return err
 	}
-	resp, err := c.http.Do(req)
+	err = c.execute(req, nil, http.StatusNoContent)
 	if err != nil {
 		return err
-	}
-	if resp.StatusCode != http.StatusNoContent {
-		return decodeError(resp.Body)
 	}
 	return nil
 }
@@ -365,12 +408,9 @@ func (c *Client) PreviousOpt(opt *PlayOptions) error {
 	if err != nil {
 		return err
 	}
-	resp, err := c.http.Do(req)
+	err = c.execute(req, nil, http.StatusNoContent)
 	if err != nil {
 		return err
-	}
-	if resp.StatusCode != http.StatusNoContent {
-		return decodeError(resp.Body)
 	}
 	return nil
 }
@@ -483,12 +523,9 @@ func (c *Client) playerFuncWithOpt(urlSuffix string, values url.Values, opt *Pla
 	if err != nil {
 		return err
 	}
-	resp, err := c.http.Do(req)
+	err = c.execute(req, nil, http.StatusNoContent)
 	if err != nil {
 		return err
-	}
-	if resp.StatusCode != http.StatusNoContent {
-		return decodeError(resp.Body)
 	}
 	return nil
 }
