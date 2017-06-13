@@ -1,5 +1,5 @@
 hash: add014a8287df66ff9425d8a54c8332817b3ccd27fdce55f06a1f1bb07be68c1
-updated: 2017-06-12T21:30:45.240158758-07:00
+updated: 2017-06-13T00:23:32.290748027-07:00
 imports:
 - name: github.com/boltdb/bolt
   version: 583e8937c61f1af6513608ccc75c97b6abdf4ff9
@@ -7,6 +7,8 @@ imports:
   version: 4c9e4561945fce2a093a25184c3a3439c98fcf37
   subpackages:
   - quadlek
+- name: github.com/Bullpeen/infobot
+  version: 32d97d2e9458829e4e64c54aab50ce3a76d23c3b
 - name: github.com/cenkalti/backoff
   version: 5d150e7eec023ce7a124856b37c68e54b4050ac7
 - name: github.com/dghubble/go-twitter
@@ -31,6 +33,8 @@ imports:
   version: 757bef944d0f21880861c2dd9c871ca543023cba
 - name: github.com/gorilla/schema
   version: 1c72d033473165ade8a126ba64180d76a9212dcd
+- name: github.com/jirwin/factpacks
+  version: 29b584ec6208f2964fc6097e23508905bf09bdff
 - name: github.com/jirwin/quadlek
   version: e1e9a8d37e5e0fadd7e3036d90658b765647fe41
   subpackages:
