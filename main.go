@@ -100,7 +100,6 @@ func run(c *cli.Context) error {
 			"13658502":           "general",  // @bkero
 			"778682":             "general",  // @jirwin
 			"26786244":           "general",  // @schonstal
-			"770397982797602816": "general",  // @mosh_bot
 			"2317524115":         "general",  // @PHP_CEO
 			"120252183":          "random",   // @fakescience
 		},
