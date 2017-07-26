@@ -96,12 +96,12 @@ func run(c *cli.Context) error {
 		c.String("twitter-access-secret"),
 		// These must be twitter user ids, not names. https://tweeterid.com/ for easy conversion between the two.
 		map[string]string{
-			"25073877":           "politics", // @realDonaldTrump
-			"822215679726100480"  "politics", // @POTUS
-			"778682":             "general",  // @jirwin
-			"26786244":           "general",  // @schonstal
-			"2317524115":         "general",  // @PHP_CEO
-			"120252183":          "random",   // @fakescience
+			"25073877":            "politics", // @realDonaldTrump
+			"822215679726100480":  "politics", // @POTUS
+			"778682":              "general",  // @jirwin
+			"26786244":            "general",  // @schonstal
+			"2317524115":          "general",  // @PHP_CEO
+			"120252183":           "random",   // @fakescience
 		},
 	))
 
