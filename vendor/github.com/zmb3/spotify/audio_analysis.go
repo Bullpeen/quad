@@ -95,9 +95,9 @@ type AnalysisTrack struct {
 }
 
 // GetAudioAnalysis queries the Spotify web API for an audio analysis of a
-// single track This call requires authorization.
+// single track.
 func (c *Client) GetAudioAnalysis(id ID) (*AudioAnalysis, error) {
-	url := fmt.Sprintf("%saudio-analysis/%s", baseAddress, id)
+	url := fmt.Sprintf("%saudio-analysis/%s", c.baseURL, id)
 
 	temp := AudioAnalysis{}
 

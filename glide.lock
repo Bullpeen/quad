@@ -1,8 +1,8 @@
-hash: add014a8287df66ff9425d8a54c8332817b3ccd27fdce55f06a1f1bb07be68c1
-updated: 2017-06-13T00:23:32.290748027-07:00
+hash: 8216b76fd5cff1b2a8713a05f512d7027173fdc856492d1e151db839f6e89142
+updated: 2017-08-24T14:54:31.429674839-07:00
 imports:
 - name: github.com/boltdb/bolt
-  version: 583e8937c61f1af6513608ccc75c97b6abdf4ff9
+  version: e9cf4fae01b5a8ff89d0ec6b32f0d9c9f79aefdd
 - name: github.com/Bullpeen/cointip
   version: 4c9e4561945fce2a093a25184c3a3439c98fcf37
   subpackages:
@@ -10,9 +10,9 @@ imports:
 - name: github.com/Bullpeen/infobot
   version: 32d97d2e9458829e4e64c54aab50ce3a76d23c3b
 - name: github.com/cenkalti/backoff
-  version: 5d150e7eec023ce7a124856b37c68e54b4050ac7
+  version: 61153c768f31ee5f130071d08fc82b85208528de
 - name: github.com/dghubble/go-twitter
-  version: d7141a7cba567120d53d0a136fce068864b43f8c
+  version: f74be7f0f20b142558537ca43852457f7c52e051
   subpackages:
   - twitter
 - name: github.com/dghubble/oauth1
@@ -20,7 +20,7 @@ imports:
 - name: github.com/dghubble/sling
   version: eb56e89ac5088bebb12eef3cb4b293300f43608b
 - name: github.com/golang/protobuf
-  version: 18c9bb3261723cd5401db4d0c9fbc5c3b6c70fe8
+  version: 6a1fa9404c0aebf36c879bc50152edcc953910d2
   subpackages:
   - proto
 - name: github.com/google/go-querystring
@@ -30,13 +30,13 @@ imports:
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/mux
-  version: 757bef944d0f21880861c2dd9c871ca543023cba
+  version: 8c683ee571b6ee7ffc9f1cafd13103c422e71cbf
 - name: github.com/gorilla/schema
-  version: 1c72d033473165ade8a126ba64180d76a9212dcd
+  version: 8b1100835db5bbdae88541510f70d114b91a7e4d
 - name: github.com/jirwin/factpacks
   version: 29b584ec6208f2964fc6097e23508905bf09bdff
 - name: github.com/jirwin/quadlek
-  version: e1e9a8d37e5e0fadd7e3036d90658b765647fe41
+  version: 55279c25e0b0c08773d2ac4b2558a53235c4b47c
   subpackages:
   - plugins/echo
   - plugins/karma
@@ -50,32 +50,33 @@ imports:
   subpackages:
   - quadlek
 - name: github.com/nlopes/slack
-  version: 5bdec13b7f814e15f59a846bcbc2f64cd71f7888
+  version: 5cde21b8b96a43fc3435a1f514123d14fd7eabdc
 - name: github.com/purdyk/tvdb
   version: 80f06ad52285ea31a6d45bdc1f74006bcc39d905
 - name: github.com/satori/go.uuid
   version: 5bf94b69c6b68ee1b541973bb8e1144db23a194b
 - name: github.com/Sirupsen/logrus
-  version: ba1b36c82c5e05c4f912a88eab0dcd91a171688f
+  version: 881bee4e20a5d11a6a88a5667c6f292072ac1963
+  repo: https://github.com/sirupsen/logrus
 - name: github.com/urfave/cli
-  version: ab403a54a148f2d857920810291539e1f817ee7b
+  version: cf33a9befefdd6c6ea1a236ab6d546e797a62cbf
 - name: github.com/zmb3/spotify
-  version: 9ad73bbd6efc68ade60e0c80ea3aa418611aaa51
+  version: 69bbd6f6bcb82bd559809be400df6477eff6d482
 - name: golang.org/x/net
-  version: da118f7b8e5954f39d0d2130ab35d4bf0e3cb344
+  version: 30f03014b4f11f9f238fdeca8cca734746a24fbb
   subpackages:
   - context
   - websocket
 - name: golang.org/x/oauth2
-  version: a6bd8cefa1811bd24b86f8902872e4e8225f74c4
+  version: f047394b6d14284165300fd82dad67edb3a4d7f6
   subpackages:
   - internal
 - name: golang.org/x/sys
-  version: 9ccfe848b9db8435a24c424abbc07a921adf1df5
+  version: c23410a886927bab8ca5e80b08af6a56faeb330d
   subpackages:
   - unix
 - name: google.golang.org/appengine
-  version: c7b8227c83007befd67b324a64c969ebc1d7475d
+  version: a2f4131514e563cedfdb6e7d267df9ad48591e93
   subpackages:
   - internal
   - internal/base

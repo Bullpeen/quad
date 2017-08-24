@@ -1,12 +1,12 @@
 package spotify
 
 import (
+	"context"
 	"crypto/tls"
 	"errors"
 	"net/http"
 	"os"
 
-	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 )
 
@@ -22,6 +22,8 @@ const (
 // The set of scopes you pass in your authentication request determines what access the
 // permissions the user is asked to grant.
 const (
+	// ScopeImageUpload seeks permission to upload images to Spotify on your behalf.
+	ScopeImageUpload = "ugc-image-upload"
 	// ScopePlaylistReadPrivate seeks permission to read
 	// a user's private playlists.
 	ScopePlaylistReadPrivate = "playlist-read-private"
@@ -156,7 +158,8 @@ func (a Authenticator) Exchange(code string) (*oauth2.Token, error) {
 func (a Authenticator) NewClient(token *oauth2.Token) Client {
 	client := a.config.Client(a.context, token)
 	return Client{
-		http: client,
+		http:    client,
+		baseURL: baseAddress,
 	}
 }
 

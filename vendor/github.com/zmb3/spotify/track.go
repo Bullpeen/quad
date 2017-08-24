@@ -81,15 +81,10 @@ func (t *SimpleTrack) TimeDuration() time.Duration {
 	return time.Duration(t.Duration) * time.Millisecond
 }
 
-// GetTrack is a wrapper around DefaultClient.GetTrack.
-func GetTrack(id ID) (*FullTrack, error) {
-	return DefaultClient.GetTrack(id)
-}
-
 // GetTrack gets Spotify catalog information for
 // a single track identified by its unique Spotify ID.
 func (c *Client) GetTrack(id ID) (*FullTrack, error) {
-	spotifyURL := baseAddress + "tracks/" + string(id)
+	spotifyURL := c.baseURL + "tracks/" + string(id)
 
 	var t FullTrack
 
@@ -101,11 +96,6 @@ func (c *Client) GetTrack(id ID) (*FullTrack, error) {
 	return &t, nil
 }
 
-// GetTracks is a wrapper around DefaultClient.GetTracks.
-func GetTracks(ids ...ID) ([]*FullTrack, error) {
-	return DefaultClient.GetTracks(ids...)
-}
-
 // GetTracks gets Spotify catalog information for multiple tracks based on their
 // Spotify IDs.  It supports up to 50 tracks in a single call.  Tracks are
 // returned in the order requested.  If a track is not found, that position in the
@@ -115,7 +105,7 @@ func (c *Client) GetTracks(ids ...ID) ([]*FullTrack, error) {
 	if len(ids) > 50 {
 		return nil, errors.New("spotify: FindTracks supports up to 50 tracks")
 	}
-	spotifyURL := baseAddress + "tracks?ids=" + strings.Join(toStringSlice(ids), ",")
+	spotifyURL := c.baseURL + "tracks?ids=" + strings.Join(toStringSlice(ids), ",")
 
 	var t struct {
 		Tracks []*FullTrack `jsosn:"tracks"`

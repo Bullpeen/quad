@@ -2,12 +2,13 @@ package spotify
 
 import (
 	"net/http"
-	"os"
 	"testing"
 )
 
 func TestSearchArtist(t *testing.T) {
-	client := testClientFile(http.StatusOK, "test_data/search_artist.txt")
+	client, server := testClientFile(http.StatusOK, "test_data/search_artist.txt")
+	defer server.Close()
+
 	result, err := client.Search("tania bowra", SearchTypeArtist)
 	if err != nil {
 		t.Error(err)
@@ -30,7 +31,9 @@ func TestSearchArtist(t *testing.T) {
 }
 
 func TestSearchTracks(t *testing.T) {
-	client := testClientFile(http.StatusOK, "test_data/search_tracks.txt")
+	client, server := testClientFile(http.StatusOK, "test_data/search_tracks.txt")
+	defer server.Close()
+
 	result, err := client.Search("uptown", SearchTypeTrack)
 	if err != nil {
 		t.Error(err)
@@ -52,36 +55,10 @@ func TestSearchTracks(t *testing.T) {
 	}
 }
 
-func TestSearchTrackWithFilter(t *testing.T) {
-	if os.Getenv("FULLTEST") == "" {
-		t.Skip()
-		return
-	}
-
-	result, err := Search("uptown artist:bruno mars", SearchTypeTrack)
-	if err != nil {
-		t.Error(err)
-	}
-
-	if result.Albums != nil {
-		t.Error("Searched for tracks but got album results")
-	}
-	if result.Playlists != nil {
-		t.Error("Searched for tracks but got playlist results")
-	}
-	if result.Artists != nil {
-		t.Error("Searched for tracks but got artist results")
-	}
-	if result.Tracks == nil || len(result.Tracks.Tracks) == 0 {
-		t.Fatal("Didn't receive track results")
-	}
-	if name := result.Tracks.Tracks[0].Name; name != "Uptown Funk" {
-		t.Errorf("Got %s, wanted Uptown Funk\n", name)
-	}
-}
-
 func TestSearchPlaylistTrack(t *testing.T) {
-	client := testClientFile(http.StatusOK, "test_data/search_trackplaylist.txt")
+	client, server := testClientFile(http.StatusOK, "test_data/search_trackplaylist.txt")
+	defer server.Close()
+
 	result, err := client.Search("holiday", SearchTypePlaylist|SearchTypeTrack)
 	if err != nil {
 		t.Error(err)
@@ -101,21 +78,24 @@ func TestSearchPlaylistTrack(t *testing.T) {
 }
 
 func TestPrevNextSearchPageErrors(t *testing.T) {
+	client, server := testClientString(0, "")
+	defer server.Close()
+
 	// we expect to get ErrNoMorePages when trying to get the prev/next page
 	// under either of these conditions:
 
 	//  1) there are no results (nil)
 	nilResults := &SearchResult{nil, nil, nil, nil}
-	if DefaultClient.NextAlbumResults(nilResults) != ErrNoMorePages ||
-		DefaultClient.NextArtistResults(nilResults) != ErrNoMorePages ||
-		DefaultClient.NextPlaylistResults(nilResults) != ErrNoMorePages ||
-		DefaultClient.NextTrackResults(nilResults) != ErrNoMorePages {
+	if client.NextAlbumResults(nilResults) != ErrNoMorePages ||
+		client.NextArtistResults(nilResults) != ErrNoMorePages ||
+		client.NextPlaylistResults(nilResults) != ErrNoMorePages ||
+		client.NextTrackResults(nilResults) != ErrNoMorePages {
 		t.Error("Next search result page should have failed for nil results")
 	}
-	if DefaultClient.PreviousAlbumResults(nilResults) != ErrNoMorePages ||
-		DefaultClient.PreviousArtistResults(nilResults) != ErrNoMorePages ||
-		DefaultClient.PreviousPlaylistResults(nilResults) != ErrNoMorePages ||
-		DefaultClient.PreviousTrackResults(nilResults) != ErrNoMorePages {
+	if client.PreviousAlbumResults(nilResults) != ErrNoMorePages ||
+		client.PreviousArtistResults(nilResults) != ErrNoMorePages ||
+		client.PreviousPlaylistResults(nilResults) != ErrNoMorePages ||
+		client.PreviousTrackResults(nilResults) != ErrNoMorePages {
 		t.Error("Previous search result page should have failed for nil results")
 	}
 	//  2) the prev/next URL is empty
@@ -125,42 +105,16 @@ func TestPrevNextSearchPageErrors(t *testing.T) {
 		Playlists: new(SimplePlaylistPage),
 		Tracks:    new(FullTrackPage),
 	}
-	if DefaultClient.NextAlbumResults(emptyURL) != ErrNoMorePages ||
-		DefaultClient.NextArtistResults(emptyURL) != ErrNoMorePages ||
-		DefaultClient.NextPlaylistResults(emptyURL) != ErrNoMorePages ||
-		DefaultClient.NextTrackResults(emptyURL) != ErrNoMorePages {
+	if client.NextAlbumResults(emptyURL) != ErrNoMorePages ||
+		client.NextArtistResults(emptyURL) != ErrNoMorePages ||
+		client.NextPlaylistResults(emptyURL) != ErrNoMorePages ||
+		client.NextTrackResults(emptyURL) != ErrNoMorePages {
 		t.Error("Next search result page should have failed with empty URL")
 	}
-	if DefaultClient.PreviousAlbumResults(emptyURL) != ErrNoMorePages ||
-		DefaultClient.PreviousArtistResults(emptyURL) != ErrNoMorePages ||
-		DefaultClient.PreviousPlaylistResults(emptyURL) != ErrNoMorePages ||
-		DefaultClient.PreviousTrackResults(emptyURL) != ErrNoMorePages {
+	if client.PreviousAlbumResults(emptyURL) != ErrNoMorePages ||
+		client.PreviousArtistResults(emptyURL) != ErrNoMorePages ||
+		client.PreviousPlaylistResults(emptyURL) != ErrNoMorePages ||
+		client.PreviousTrackResults(emptyURL) != ErrNoMorePages {
 		t.Error("Previous search result page should have failed with empty URL")
-	}
-}
-
-func TestSearchAgainstAPI(t *testing.T) {
-	if os.Getenv("FULLTEST") == "" {
-		t.Skip()
-		return
-	}
-	t.Parallel()
-	res, err := Search("Dave", SearchTypeArtist)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	// keep requesting the next page of results, up to a maximum of 5 times
-	i := 0
-	for err = nil; err != ErrNoMorePages && i < 5; err = DefaultClient.NextArtistResults(res) {
-		i++
-	}
-	lastArtist := res.Artists.Artists[0].ID
-	// backtrack one page and make sure our artist changed
-	if err = DefaultClient.PreviousArtistResults(res); err != nil {
-		t.Error(err)
-	}
-	if lastArtist == res.Artists.Artists[0].ID {
-		t.Error("Failed to get previous page")
 	}
 }
