@@ -101,6 +101,10 @@ func run(c *cli.Context) error {
 			"830896623689547776":  "politics", // @PresVillain
 			"778682":              "general",  // @jirwin
 			"26786244":            "general",  // @schonstal
+			//added for retweet testing
+			"778682":	       "quadlek-chat", // @jirwin
+			"26666684":	       "quadlek-chat", // @sonicdm
+			
 		},
 	))
 
