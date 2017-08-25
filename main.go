@@ -99,7 +99,6 @@ func run(c *cli.Context) error {
 			"25073877":            "politics", // @realDonaldTrump
 			"822215679726100480":  "politics", // @POTUS
 			"830896623689547776":  "politics", // @PresVillain
-			"778682":              "general",  // @jirwin
 			"26786244":            "general",  // @schonstal
 			//added for retweet testing
 			"778682":	       "quadlek-chat", // @jirwin
