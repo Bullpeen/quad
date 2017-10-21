@@ -370,3 +370,75 @@ func TestCurrentUsersFollowedArtistsOpt(t *testing.T) {
 
 	client.CurrentUsersFollowedArtistsOpt(50, "0aV6DOiouImYTqrR5YlIqx")
 }
+
+func TestCurrentUsersTopArtists(t *testing.T) {
+	client, server := testClientFile(http.StatusOK, "test_data/current_users_top_artists.txt")
+	defer server.Close()
+
+	artists, err := client.CurrentUsersTopArtists()
+	if err != nil {
+		t.Error(err)
+	}
+	if artists.Endpoint != "https://api.spotify.com/v1/me/top/artists" {
+		t.Error("Endpoint incorrect")
+	}
+	if artists.Limit != 20 {
+		t.Errorf("Expected limit 20, got %d\n", artists.Limit)
+	}
+	if artists.Total != 10 {
+		t.Errorf("Expected total 10, got %d\n", artists.Total)
+		return
+	}
+	if len(artists.Artists) != artists.Total {
+		t.Error("Didn't get expected number of results")
+		return
+	}
+	if artists.Artists[0].Followers.Count != 8437 {
+		t.Errorf("Expected follower count of 8437, got %d\n", artists.Artists[0].Followers.Count)
+	}
+
+	name := "insaneintherainmusic"
+	if artists.Artists[0].Name != name {
+		t.Errorf("Expected '%s', got '%s'\n", name, artists.Artists[0].Name)
+		fmt.Printf("\n%#v\n", artists.Artists[0])
+	}
+}
+
+func TestCurrentUsersTopTracks(t *testing.T) {
+	client, server := testClientFile(http.StatusOK, "test_data/current_users_top_tracks.txt")
+	defer server.Close()
+
+	tracks, err := client.CurrentUsersTopTracks()
+	if err != nil {
+		t.Error(err)
+	}
+	if tracks.Endpoint != "https://api.spotify.com/v1/me/top/tracks" {
+		t.Error("Endpoint incorrect")
+	}
+	if tracks.Limit != 20 {
+		t.Errorf("Expected limit 20, got %d\n", tracks.Limit)
+	}
+	if tracks.Total != 380 {
+		t.Errorf("Expected total 380, got %d\n", tracks.Total)
+		return
+	}
+	if len(tracks.Tracks) != tracks.Limit {
+		t.Errorf("Didn't get expected number of results")
+		return
+	}
+
+	name := "Adventure Awaits! (Alola Region Theme)"
+	if tracks.Tracks[0].Name != name {
+		t.Errorf("Expected '%s', got '%s'\n", name, tracks.Tracks[0].Name)
+		fmt.Printf("\n%#v\n", tracks.Tracks[0])
+	}
+
+	isrc := "QZ4JJ1764466"
+	i, ok := tracks.Tracks[0].ExternalIDs["isrc"]
+	if !ok {
+		t.Error("External IDs missing ISRC")
+	}
+	if i != isrc {
+		t.Errorf("Wrong ISRC: want %s, got %s\n", isrc, i)
+	}
+}

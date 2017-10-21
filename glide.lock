@@ -1,5 +1,5 @@
 hash: 8216b76fd5cff1b2a8713a05f512d7027173fdc856492d1e151db839f6e89142
-updated: 2017-08-25T13:08:12.32924852-07:00
+updated: 2017-10-21T04:03:03.283884-07:00
 imports:
 - name: github.com/boltdb/bolt
   version: e9cf4fae01b5a8ff89d0ec6b32f0d9c9f79aefdd
@@ -10,9 +10,9 @@ imports:
 - name: github.com/Bullpeen/infobot
   version: 32d97d2e9458829e4e64c54aab50ce3a76d23c3b
 - name: github.com/cenkalti/backoff
-  version: 61153c768f31ee5f130071d08fc82b85208528de
+  version: 309aa717adbf351e92864cbedf9cca0b769a4b5a
 - name: github.com/dghubble/go-twitter
-  version: f74be7f0f20b142558537ca43852457f7c52e051
+  version: c4115fa44a928413e0b857e0eb47376ffde3a61a
   subpackages:
   - twitter
 - name: github.com/dghubble/oauth1
@@ -20,7 +20,7 @@ imports:
 - name: github.com/dghubble/sling
   version: eb56e89ac5088bebb12eef3cb4b293300f43608b
 - name: github.com/golang/protobuf
-  version: 6a1fa9404c0aebf36c879bc50152edcc953910d2
+  version: 130e6b02ab059e7b717a096f397c5b60111cae74
   subpackages:
   - proto
 - name: github.com/google/go-querystring
@@ -36,7 +36,7 @@ imports:
 - name: github.com/jirwin/factpacks
   version: 29b584ec6208f2964fc6097e23508905bf09bdff
 - name: github.com/jirwin/quadlek
-  version: c146a74ec132dc785d264d1fe0612d97cb41b3cc
+  version: 6ad66b083a3f21cae2ee28b9da8a336b6a288200
   subpackages:
   - plugins/echo
   - plugins/karma
@@ -56,27 +56,33 @@ imports:
 - name: github.com/satori/go.uuid
   version: 5bf94b69c6b68ee1b541973bb8e1144db23a194b
 - name: github.com/Sirupsen/logrus
-  version: 881bee4e20a5d11a6a88a5667c6f292072ac1963
+  version: 89742aefa4b206dcf400792f3bd35b542998eb3b
   repo: https://github.com/sirupsen/logrus
 - name: github.com/urfave/cli
   version: cf33a9befefdd6c6ea1a236ab6d546e797a62cbf
 - name: github.com/zmb3/spotify
-  version: 69bbd6f6bcb82bd559809be400df6477eff6d482
+  version: 9832ad1cfcf12935e2c585242104695ad5e382a9
+- name: golang.org/x/crypto
+  version: 541b9d50ad47e36efd8fb423e938e59ff1691f68
+  subpackages:
+  - ssh/terminal
 - name: golang.org/x/net
   version: 30f03014b4f11f9f238fdeca8cca734746a24fbb
   subpackages:
   - context
+  - context/ctxhttp
   - websocket
 - name: golang.org/x/oauth2
-  version: f047394b6d14284165300fd82dad67edb3a4d7f6
+  version: bb50c06baba3d0c76f9d125c0719093e315b5b44
   subpackages:
   - internal
 - name: golang.org/x/sys
-  version: c23410a886927bab8ca5e80b08af6a56faeb330d
+  version: 8dbc5d05d6edcc104950cc299a1ce6641235bc86
   subpackages:
   - unix
+  - windows
 - name: google.golang.org/appengine
-  version: a2f4131514e563cedfdb6e7d267df9ad48591e93
+  version: a2e0dc829727a4f957a7428b1f322805cfc1f362
   subpackages:
   - internal
   - internal/base

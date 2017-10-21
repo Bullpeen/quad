@@ -327,3 +327,73 @@ func (c *Client) CurrentUsersPlaylistsOpt(opt *Options) (*SimplePlaylistPage, er
 
 	return &result, nil
 }
+
+// CurrentUsersTopArtistsOpt gets a list of the top played artists in a given time
+// range of the current Spotify user. It supports up to 50 artists in a single
+// call. This call requires ScopeUserTopRead.
+func (c *Client) CurrentUsersTopArtistsOpt(opt *Options) (*FullArtistPage, error) {
+	spotifyURL := c.baseURL + "me/top/artists"
+	if opt != nil {
+		v := url.Values{}
+		if opt.Limit != nil {
+			v.Set("limit", strconv.Itoa(*opt.Limit))
+		}
+		if opt.Timerange != nil {
+			v.Set("time_range", *opt.Timerange+"_term")
+		}
+		if params := v.Encode(); params != "" {
+			spotifyURL += "?" + params
+		}
+	}
+
+	var result FullArtistPage
+
+	err := c.get(spotifyURL, &result)
+	if err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+// CurrentUsersTopArtists is like CurrentUsersTopArtistsOpt but with
+// sensible defaults. The default limit is 20 and the default timerange
+// is medium_term.
+func (c *Client) CurrentUsersTopArtists() (*FullArtistPage, error) {
+	return c.CurrentUsersTopArtistsOpt(nil)
+}
+
+// CurrentUsersTopTracksOpt gets a list of the top played tracks in a given time
+// range of the current Spotify user. It supports up to 50 tracks in a single
+// call. This call requires ScopeUserTopRead.
+func (c *Client) CurrentUsersTopTracksOpt(opt *Options) (*FullTrackPage, error) {
+	spotifyURL := c.baseURL + "me/top/tracks"
+	if opt != nil {
+		v := url.Values{}
+		if opt.Limit != nil {
+			v.Set("limit", strconv.Itoa(*opt.Limit))
+		}
+		if opt.Timerange != nil {
+			v.Set("time_range", *opt.Timerange+"_term")
+		}
+		if params := v.Encode(); params != "" {
+			spotifyURL += "?" + params
+		}
+	}
+
+	var result FullTrackPage
+
+	err := c.get(spotifyURL, &result)
+	if err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+// CurrentUsersTopTracks is like CurrentUsersTopTracksOpt but with
+// sensible defaults. The default limit is 20 and the default timerange
+// is medium_term.
+func (c *Client) CurrentUsersTopTracks() (*FullTrackPage, error) {
+	return c.CurrentUsersTopTracksOpt(nil)
+}
