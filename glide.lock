@@ -1,5 +1,5 @@
 hash: 8216b76fd5cff1b2a8713a05f512d7027173fdc856492d1e151db839f6e89142
-updated: 2017-10-21T04:03:03.283884-07:00
+updated: 2017-10-21T10:50:48.930899-07:00
 imports:
 - name: github.com/boltdb/bolt
   version: e9cf4fae01b5a8ff89d0ec6b32f0d9c9f79aefdd
@@ -36,7 +36,7 @@ imports:
 - name: github.com/jirwin/factpacks
   version: 29b584ec6208f2964fc6097e23508905bf09bdff
 - name: github.com/jirwin/quadlek
-  version: 6ad66b083a3f21cae2ee28b9da8a336b6a288200
+  version: 93a58822daccf604e611eedfa1cbd52ebdb10304
   subpackages:
   - plugins/echo
   - plugins/karma
