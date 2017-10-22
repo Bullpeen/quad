@@ -1,6 +1,8 @@
 hash: 8216b76fd5cff1b2a8713a05f512d7027173fdc856492d1e151db839f6e89142
-updated: 2017-10-21T10:50:48.930899-07:00
+updated: 2017-10-22T09:26:12.999555-07:00
 imports:
+- name: github.com/asaskevich/govalidator
+  version: ddb193b4c7bfa1d1c1923ae05a1ee8fb0cd45cf3
 - name: github.com/boltdb/bolt
   version: e9cf4fae01b5a8ff89d0ec6b32f0d9c9f79aefdd
 - name: github.com/Bullpeen/cointip
@@ -19,6 +21,28 @@ imports:
   version: 7d51c10e15ca32917b32ce43f6e25840d6951db4
 - name: github.com/dghubble/sling
   version: eb56e89ac5088bebb12eef3cb4b293300f43608b
+- name: github.com/go-openapi/analysis
+  version: 8ed83f2ea9f00f945516462951a288eaa68bf0d6
+- name: github.com/go-openapi/errors
+  version: 03cfca65330da08a5a440053faf994a3c682b5bf
+- name: github.com/go-openapi/jsonpointer
+  version: 779f45308c19820f1a69e9a4cd965f496e0da10f
+- name: github.com/go-openapi/jsonreference
+  version: 36d33bfe519efae5632669801b180bf1a245da3b
+- name: github.com/go-openapi/loads
+  version: c3e1ca4c0b6160cac10aeef7e8b425cc95b9c820
+- name: github.com/go-openapi/runtime
+  version: e8231e16de5bcda9839e03ae07c5c96a1fd82041
+  subpackages:
+  - client
+- name: github.com/go-openapi/spec
+  version: 84b5bee7bcb76f3d17bcbaf421bac44bd5709ca6
+- name: github.com/go-openapi/strfmt
+  version: 610b6cacdcde6852f4de68998bd20ce1dac85b22
+- name: github.com/go-openapi/swag
+  version: f3f9494671f93fcff853e3c6e9e948b3eb71e590
+- name: github.com/go-openapi/validate
+  version: b6cfc35bf312e6fb320d85ed9fc3ac408dcb8694
 - name: github.com/golang/protobuf
   version: 130e6b02ab059e7b717a096f397c5b60111cae74
   subpackages:
@@ -35,9 +59,15 @@ imports:
   version: 8b1100835db5bbdae88541510f70d114b91a7e4d
 - name: github.com/jirwin/factpacks
   version: 29b584ec6208f2964fc6097e23508905bf09bdff
-- name: github.com/jirwin/quadlek
-  version: 93a58822daccf604e611eedfa1cbd52ebdb10304
+- name: github.com/jirwin/ipfs-archive
+  version: 813689260755b9a10dd656b50a40223ff2706308
   subpackages:
+  - client/ipfs
+  - models
+- name: github.com/jirwin/quadlek
+  version: aa438e223dc57c1ae09b797a69a0cfe752644894
+  subpackages:
+  - plugins/archive
   - plugins/echo
   - plugins/karma
   - plugins/nextep
@@ -45,12 +75,24 @@ imports:
   - plugins/spotify
   - plugins/twitter
   - quadlek
+- name: github.com/mailru/easyjson
+  version: efb36c3268025336c3cdd805e3be5f88d1f62b73
+  subpackages:
+  - buffer
+  - jlexer
+  - jwriter
+- name: github.com/mitchellh/mapstructure
+  version: 06020f85339e21b2478f756a78e295255ffa4d6a
 - name: github.com/morgabra/cointip
   version: d9a0663739d870b94b8b3873ba61733d2054a941
   subpackages:
   - quadlek
 - name: github.com/nlopes/slack
   version: 5cde21b8b96a43fc3435a1f514123d14fd7eabdc
+- name: github.com/PuerkitoBio/purell
+  version: fd18e053af8a4ff11039269006e8037ff374ce0e
+- name: github.com/PuerkitoBio/urlesc
+  version: de5bf2ad457846296e2031421a34e2568e304e35
 - name: github.com/purdyk/tvdb
   version: 80f06ad52285ea31a6d45bdc1f74006bcc39d905
 - name: github.com/satori/go.uuid
@@ -71,6 +113,7 @@ imports:
   subpackages:
   - context
   - context/ctxhttp
+  - idna
   - websocket
 - name: golang.org/x/oauth2
   version: bb50c06baba3d0c76f9d125c0719093e315b5b44
@@ -81,6 +124,14 @@ imports:
   subpackages:
   - unix
   - windows
+- name: golang.org/x/text
+  version: c01e4764d870b77f8abe5096ee19ad20d80e8075
+  subpackages:
+  - secure/bidirule
+  - transform
+  - unicode/bidi
+  - unicode/norm
+  - width
 - name: google.golang.org/appengine
   version: a2e0dc829727a4f957a7428b1f322805cfc1f362
   subpackages:
@@ -91,4 +142,11 @@ imports:
   - internal/remote_api
   - internal/urlfetch
   - urlfetch
+- name: gopkg.in/mgo.v2
+  version: 3f83fa5005286a7fe593b055f0d7771a7dce4655
+  subpackages:
+  - bson
+  - internal/json
+- name: gopkg.in/yaml.v2
+  version: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
 testImports: []

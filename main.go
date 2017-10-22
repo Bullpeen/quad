@@ -8,6 +8,7 @@ import (
 
 	cointip "github.com/Bullpeen/cointip/quadlek"
 	log "github.com/Sirupsen/logrus"
+	"github.com/jirwin/quadlek/plugins/archive"
 	"github.com/jirwin/quadlek/plugins/echo"
 	"github.com/jirwin/quadlek/plugins/karma"
 	"github.com/jirwin/quadlek/plugins/nextep"
@@ -70,6 +71,12 @@ func run(c *cli.Context) error {
 	err = bot.RegisterPlugin(spotify.Register())
 	if err != nil {
 		fmt.Printf("error registering spotify plugin: %s", err.Error())
+		return nil
+	}
+
+	err = bot.RegisterPlugin(archive.Register())
+	if err != nil {
+		fmt.Printf("error registering archive plugin: %s", err.Error())
 		return nil
 	}
 
