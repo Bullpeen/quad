@@ -36,20 +36,24 @@ var primitiveDecoders = map[reflect.Kind]string{
 }
 
 var primitiveStringDecoders = map[reflect.Kind]string{
-	reflect.Int:    "in.IntStr()",
-	reflect.Int8:   "in.Int8Str()",
-	reflect.Int16:  "in.Int16Str()",
-	reflect.Int32:  "in.Int32Str()",
-	reflect.Int64:  "in.Int64Str()",
-	reflect.Uint:   "in.UintStr()",
-	reflect.Uint8:  "in.Uint8Str()",
-	reflect.Uint16: "in.Uint16Str()",
-	reflect.Uint32: "in.Uint32Str()",
-	reflect.Uint64: "in.Uint64Str()",
+	reflect.String:  "in.String()",
+	reflect.Int:     "in.IntStr()",
+	reflect.Int8:    "in.Int8Str()",
+	reflect.Int16:   "in.Int16Str()",
+	reflect.Int32:   "in.Int32Str()",
+	reflect.Int64:   "in.Int64Str()",
+	reflect.Uint:    "in.UintStr()",
+	reflect.Uint8:   "in.Uint8Str()",
+	reflect.Uint16:  "in.Uint16Str()",
+	reflect.Uint32:  "in.Uint32Str()",
+	reflect.Uint64:  "in.Uint64Str()",
+	reflect.Uintptr: "in.UintptrStr()",
+	reflect.Float32: "in.Float32Str()",
+	reflect.Float64: "in.Float64Str()",
 }
 
 var customDecoders = map[string]string{
-	"json.Number":    "in.JsonNumber()",
+	"json.Number": "in.JsonNumber()",
 }
 
 // genTypeDecoder generates decoding code for the type t, but uses unmarshaler interface if implemented by t.
@@ -82,11 +86,19 @@ func (g *Generator) genTypeDecoder(t reflect.Type, out string, tags fieldTags, i
 	return err
 }
 
+// returns true of the type t implements one of the custom unmarshaler interfaces
+func hasCustomUnmarshaler(t reflect.Type) bool {
+	t = reflect.PtrTo(t)
+	return t.Implements(reflect.TypeOf((*easyjson.Unmarshaler)(nil)).Elem()) ||
+		t.Implements(reflect.TypeOf((*json.Unmarshaler)(nil)).Elem()) ||
+		t.Implements(reflect.TypeOf((*encoding.TextUnmarshaler)(nil)).Elem())
+}
+
 // genTypeDecoderNoCheck generates decoding code for the type t.
 func (g *Generator) genTypeDecoderNoCheck(t reflect.Type, out string, tags fieldTags, indent int) error {
 	ws := strings.Repeat("  ", indent)
 	// Check whether type is primitive, needs to be done after interface check.
-	if dec := customDecoders[t.String()]; dec != ""  {
+	if dec := customDecoders[t.String()]; dec != "" {
 		fmt.Fprintln(g.out, ws+out+" = "+dec)
 		return nil
 	} else if dec := primitiveStringDecoders[t.Kind()]; dec != "" && tags.asString {
@@ -168,7 +180,7 @@ func (g *Generator) genTypeDecoderNoCheck(t reflect.Type, out string, tags field
 			fmt.Fprintln(g.out, ws+"  for !in.IsDelim(']') {")
 			fmt.Fprintln(g.out, ws+"    if "+iterVar+" < "+fmt.Sprint(length)+" {")
 
-			if err := g.genTypeDecoder(elem, out+"["+iterVar+"]", tags, indent+3); err != nil {
+			if err := g.genTypeDecoder(elem, "("+out+")["+iterVar+"]", tags, indent+3); err != nil {
 				return err
 			}
 
@@ -205,9 +217,10 @@ func (g *Generator) genTypeDecoderNoCheck(t reflect.Type, out string, tags field
 
 	case reflect.Map:
 		key := t.Key()
-		if key.Kind() != reflect.String {
-			return fmt.Errorf("map type %v not supported: only string keys are allowed", key)
-		}
+		keyDec, ok := primitiveStringDecoders[key.Kind()]
+		if !ok && !hasCustomUnmarshaler(key) {
+			return fmt.Errorf("map type %v not supported: only string and integer keys and types implementing json.Unmarshaler are allowed", key)
+		} // else assume the caller knows what they are doing and that the custom unmarshaler performs the translation from string or integer keys to the key type
 		elem := t.Elem()
 		tmpVar := g.uniqueVarName()
 
@@ -222,7 +235,15 @@ func (g *Generator) genTypeDecoderNoCheck(t reflect.Type, out string, tags field
 		fmt.Fprintln(g.out, ws+"  }")
 
 		fmt.Fprintln(g.out, ws+"  for !in.IsDelim('}') {")
-		fmt.Fprintln(g.out, ws+"    key := "+g.getType(t.Key())+"(in.String())")
+		if keyDec != "" {
+			fmt.Fprintln(g.out, ws+"    key := "+g.getType(key)+"("+keyDec+")")
+		} else {
+			fmt.Fprintln(g.out, ws+"    var key "+g.getType(key))
+			if err := g.genTypeDecoder(key, "key", tags, indent+2); err != nil {
+				return err
+			}
+		}
+
 		fmt.Fprintln(g.out, ws+"    in.WantColon()")
 		fmt.Fprintln(g.out, ws+"    var "+tmpVar+" "+g.getType(elem))
 

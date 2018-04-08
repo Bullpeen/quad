@@ -43,6 +43,8 @@ const (
 	UnixPath       string = `^(/[^/\x00]*)+/?$`
 	Semver         string = "^v?(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)(-(0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(\\.(0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*)?(\\+[0-9a-zA-Z-]+(\\.[0-9a-zA-Z-]+)*)?$"
 	tagName        string = "valid"
+	hasLowerCase   string = ".*[[:lower:]]"
+	hasUpperCase   string = ".*[[:upper:]]"
 )
 
 // Used by IsFilePath func
@@ -56,6 +58,9 @@ const (
 )
 
 var (
+	userRegexp       = regexp.MustCompile("^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~.-]+$")
+	hostRegexp       = regexp.MustCompile("^[^\\s]+\\.[^\\s]+$")
+	userDotRegexp    = regexp.MustCompile("(^[.]{1})|([.]{1}$)|([.]{2,})")
 	rxEmail          = regexp.MustCompile(Email)
 	rxCreditCard     = regexp.MustCompile(CreditCard)
 	rxISBN10         = regexp.MustCompile(ISBN10)
@@ -87,4 +92,6 @@ var (
 	rxWinPath        = regexp.MustCompile(WinPath)
 	rxUnixPath       = regexp.MustCompile(UnixPath)
 	rxSemver         = regexp.MustCompile(Semver)
+	rxHasLowerCase   = regexp.MustCompile(hasLowerCase)
+	rxHasUpperCase   = regexp.MustCompile(hasUpperCase)
 )

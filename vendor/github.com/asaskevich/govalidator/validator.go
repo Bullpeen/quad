@@ -2,8 +2,14 @@
 package govalidator
 
 import (
+	"bytes"
+	"crypto/rsa"
+	"crypto/x509"
+	"encoding/base64"
 	"encoding/json"
+	"encoding/pem"
 	"fmt"
+	"io/ioutil"
 	"net"
 	"net/url"
 	"reflect"
@@ -25,6 +31,7 @@ var (
 
 const maxURLRuneCount = 2083
 const minURLRuneCount = 3
+const RF3339WithoutZone = "2006-01-02T15:04:05"
 
 // SetFieldsRequiredByDefault causes validation to fail when struct fields
 // do not include validations or are not explicitly marked as exempt (using `valid:"-"` or `valid:"email,optional"`).
@@ -50,12 +57,49 @@ func IsEmail(str string) bool {
 	return rxEmail.MatchString(str)
 }
 
+// IsExistingEmail check if the string is an email of existing domain
+func IsExistingEmail(email string) bool {
+
+	if len(email) < 6 || len(email) > 254 {
+		return false
+	}
+	at := strings.LastIndex(email, "@")
+	if at <= 0 || at > len(email)-3 {
+		return false
+	}
+	user := email[:at]
+	host := email[at+1:]
+	if len(user) > 64 {
+		return false
+	}
+	if userDotRegexp.MatchString(user) || !userRegexp.MatchString(user) || !hostRegexp.MatchString(host) {
+		return false
+	}
+	switch host {
+	case "localhost", "example.com":
+		return true
+	}
+	if _, err := net.LookupMX(host); err != nil {
+		if _, err := net.LookupIP(host); err != nil {
+			return false
+		}
+	}
+
+	return true
+}
+
 // IsURL check if the string is an URL.
 func IsURL(str string) bool {
 	if str == "" || utf8.RuneCountInString(str) >= maxURLRuneCount || len(str) <= minURLRuneCount || strings.HasPrefix(str, ".") {
 		return false
 	}
-	u, err := url.Parse(str)
+	strTemp := str
+	if strings.Index(str, ":") >= 0 && strings.Index(str, "://") == -1 {
+		// support no indicated urlscheme but with colon for port number
+		// http:// is appended so url.Parse will succeed, strTemp used so it does not impact rxURL.MatchString
+		strTemp = "http://" + str
+	}
+	u, err := url.Parse(strTemp)
 	if err != nil {
 		return false
 	}
@@ -66,7 +110,6 @@ func IsURL(str string) bool {
 		return false
 	}
 	return rxURL.MatchString(str)
-
 }
 
 // IsRequestURL check if the string rawurl, assuming
@@ -217,6 +260,22 @@ func IsUpperCase(str string) bool {
 		return true
 	}
 	return str == strings.ToUpper(str)
+}
+
+// HasLowerCase check if the string contains at least 1 lowercase. Empty string is valid.
+func HasLowerCase(str string) bool {
+	if IsNull(str) {
+		return true
+	}
+	return rxHasLowerCase.MatchString(str)
+}
+
+// HasUpperCase check if the string contians as least 1 uppercase. Empty string is valid.
+func HasUpperCase(str string) bool {
+	if IsNull(str) {
+		return true
+	}
+	return rxHasUpperCase.MatchString(str)
 }
 
 // IsInt check if the string is an integer. Empty string is valid.
@@ -487,6 +546,33 @@ func IsDNSName(str string) bool {
 	return !IsIP(str) && rxDNSName.MatchString(str)
 }
 
+// IsHash checks if a string is a hash of type algorithm.
+// Algorithm is one of ['md4', 'md5', 'sha1', 'sha256', 'sha384', 'sha512', 'ripemd128', 'ripemd160', 'tiger128', 'tiger160', 'tiger192', 'crc32', 'crc32b']
+func IsHash(str string, algorithm string) bool {
+	len := "0"
+	algo := strings.ToLower(algorithm)
+
+	if algo == "crc32" || algo == "crc32b" {
+		len = "8"
+	} else if algo == "md5" || algo == "md4" || algo == "ripemd128" || algo == "tiger128" {
+		len = "32"
+	} else if algo == "sha1" || algo == "ripemd160" || algo == "tiger160" {
+		len = "40"
+	} else if algo == "tiger192" {
+		len = "48"
+	} else if algo == "sha256" {
+		len = "64"
+	} else if algo == "sha384" {
+		len = "96"
+	} else if algo == "sha512" {
+		len = "128"
+	} else {
+		return false
+	}
+
+	return Matches(str, "^[a-f0-9]{"+len+"}$")
+}
+
 // IsDialString validates the given string for usage with the various Dial() functions
 func IsDialString(str string) bool {
 
@@ -561,6 +647,40 @@ func IsLongitude(str string) bool {
 	return rxLongitude.MatchString(str)
 }
 
+// IsRsaPublicKey check if a string is valid public key with provided length
+func IsRsaPublicKey(str string, keylen int) bool {
+	bb := bytes.NewBufferString(str)
+	pemBytes, err := ioutil.ReadAll(bb)
+	if err != nil {
+		return false
+	}
+	block, _ := pem.Decode(pemBytes)
+	if block != nil && block.Type != "PUBLIC KEY" {
+		return false
+	}
+	var der []byte
+
+	if block != nil {
+		der = block.Bytes
+	} else {
+		der, err = base64.StdEncoding.DecodeString(str)
+		if err != nil {
+			return false
+		}
+	}
+
+	key, err := x509.ParsePKIXPublicKey(der)
+	if err != nil {
+		return false
+	}
+	pubkey, ok := key.(*rsa.PublicKey)
+	if !ok {
+		return false
+	}
+	bitlen := len(pubkey.N.Bytes()) * 8
+	return bitlen == int(keylen)
+}
+
 func toJSONName(tag string) string {
 	if tag == "" {
 		return ""
@@ -569,7 +689,16 @@ func toJSONName(tag string) string {
 	// JSON name always comes first. If there's no options then split[0] is
 	// JSON name, if JSON name is not set, then split[0] is an empty string.
 	split := strings.SplitN(tag, ",", 2)
-	return split[0]
+
+	name := split[0]
+
+	// However it is possible that the field is skipped when
+	// (de-)serializing from/to JSON, in which case assume that there is no
+	// tag name to use
+	if name == "-" {
+		return ""
+	}
+	return name
 }
 
 // ValidateStruct use tags for fields.
@@ -596,7 +725,9 @@ func ValidateStruct(s interface{}) (bool, error) {
 			continue // Private field
 		}
 		structResult := true
-		if valueField.Kind() == reflect.Struct && typeField.Tag.Get(tagName) != "-" {
+		if (valueField.Kind() == reflect.Struct ||
+			(valueField.Kind() == reflect.Ptr && valueField.Elem().Kind() == reflect.Struct)) &&
+			typeField.Tag.Get(tagName) != "-" {
 			var err error
 			structResult, err = ValidateStruct(valueField.Interface())
 			if err != nil {
@@ -614,6 +745,14 @@ func ValidateStruct(s interface{}) (bool, error) {
 					jsonError.Name = jsonTag
 					err2 = jsonError
 				case Errors:
+					for i2, err3 := range jsonError {
+						switch customErr := err3.(type) {
+						case Error:
+							customErr.Name = jsonTag
+							jsonError[i2] = customErr
+						}
+					}
+
 					err2 = jsonError
 				}
 			}
@@ -692,6 +831,11 @@ func IsRFC3339(str string) bool {
 	return IsTime(str, time.RFC3339)
 }
 
+// IsRFC3339WithoutZone check if string is valid timestamp value according to RFC3339 which excludes the timezone.
+func IsRFC3339WithoutZone(str string) bool {
+	return IsTime(str, RF3339WithoutZone)
+}
+
 // IsISO4217 check if string is valid ISO currency code
 func IsISO4217(str string) bool {
 	for _, currency := range ISO4217List {
@@ -718,6 +862,17 @@ func ByteLength(str string, params ...string) bool {
 // Alias for StringLength
 func RuneLength(str string, params ...string) bool {
 	return StringLength(str, params...)
+}
+
+// IsRsaPub check whether string is valid RSA key
+// Alias for IsRsaPublicKey
+func IsRsaPub(str string, params ...string) bool {
+	if len(params) == 1 {
+		len, _ := ToInt(params[0])
+		return IsRsaPublicKey(str, int(len))
+	}
+
+	return false
 }
 
 // StringMatches checks if a string matches a given pattern.
@@ -784,7 +939,7 @@ func checkRequired(v reflect.Value, t reflect.StructField, options tagOptionsMap
 		}
 		return false, Error{t.Name, fmt.Errorf("non zero value required"), false, "required"}
 	} else if _, isOptional := options["optional"]; fieldsRequiredByDefault && !isOptional {
-		return false, Error{t.Name, fmt.Errorf("All fields are required to at least have one validation defined"), false, "required"}
+		return false, Error{t.Name, fmt.Errorf("Missing required field"), false, "required"}
 	}
 	// not required and empty is valid
 	return true, nil
@@ -888,7 +1043,11 @@ func typeCheck(v reflect.Value, t reflect.StructField, o reflect.Value, options 
 				delete(options, validatorSpec)
 
 				switch v.Kind() {
-				case reflect.String:
+				case reflect.String,
+					reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64,
+					reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64,
+					reflect.Float32, reflect.Float64:
+
 					field := fmt.Sprint(v) // make value into string, then validate with regex
 					if result := validatefunc(field, ps[1:]...); (!result && !negate) || (result && negate) {
 						if customMsgExists {

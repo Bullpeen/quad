@@ -1,6 +1,7 @@
 package schema
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -247,6 +248,49 @@ func TestRegisterEncoder(t *testing.T) {
 	valExists(t, "oneSliceAsWord", "one", v1)
 }
 
+func TestEncoderOrder(t *testing.T) {
+	type builtinEncoderSimple int
+	type builtinEncoderSimpleOverridden int
+	type builtinEncoderSlice []int
+	type builtinEncoderSliceOverridden []int
+	type builtinEncoderStruct struct{ nr int }
+	type builtinEncoderStructOverridden struct{ nr int }
+
+	s1 := &struct {
+		builtinEncoderSimple           `schema:"simple"`
+		builtinEncoderSimpleOverridden `schema:"simple_overridden"`
+		builtinEncoderSlice            `schema:"slice"`
+		builtinEncoderSliceOverridden  `schema:"slice_overridden"`
+		builtinEncoderStruct           `schema:"struct"`
+		builtinEncoderStructOverridden `schema:"struct_overridden"`
+	}{
+		1,
+		1,
+		[]int{2},
+		[]int{2},
+		builtinEncoderStruct{3},
+		builtinEncoderStructOverridden{3},
+	}
+	v1 := make(map[string][]string)
+
+	encoder := NewEncoder()
+	encoder.RegisterEncoder(s1.builtinEncoderSimpleOverridden, func(v reflect.Value) string { return "one" })
+	encoder.RegisterEncoder(s1.builtinEncoderSliceOverridden, func(v reflect.Value) string { return "two" })
+	encoder.RegisterEncoder(s1.builtinEncoderStructOverridden, func(v reflect.Value) string { return "three" })
+
+	err := encoder.Encode(s1, v1)
+	if err != nil {
+		t.Errorf("Encoder has non-nil error: %v", err)
+	}
+
+	valExists(t, "simple", "1", v1)
+	valExists(t, "simple_overridden", "one", v1)
+	valExists(t, "slice", "2", v1)
+	valExists(t, "slice_overridden", "two", v1)
+	valExists(t, "nr", "3", v1)
+	valExists(t, "struct_overridden", "three", v1)
+}
+
 func valExists(t *testing.T, key string, expect string, result map[string][]string) {
 	valsExist(t, key, []string{expect}, result)
 }
@@ -288,4 +332,88 @@ func TestEncoderSetAliasTag(t *testing.T) {
 	encoder.SetAliasTag("json")
 	encoder.Encode(&s, data)
 	valExists(t, "id", "foo", data)
+}
+
+type E5 struct {
+	F01 int      `schema:"f01,omitempty"`
+	F02 string   `schema:"f02,omitempty"`
+	F03 *string  `schema:"f03,omitempty"`
+	F04 *int8    `schema:"f04,omitempty"`
+	F05 float64  `schema:"f05,omitempty"`
+	F06 E5F06    `schema:"f06,omitempty"`
+	F07 E5F06    `schema:"f07,omitempty"`
+	F08 []string `schema:"f08,omitempty"`
+	F09 []string `schema:"f09,omitempty"`
+}
+
+type E5F06 struct {
+	F0601 string `schema:"f0601,omitempty"`
+}
+
+func TestEncoderWithOmitempty(t *testing.T) {
+	vals := map[string][]string{}
+
+	s := E5{
+		F02: "test",
+		F07: E5F06{
+			F0601: "test",
+		},
+		F09: []string{"test"},
+	}
+
+	encoder := NewEncoder()
+	encoder.Encode(&s, vals)
+
+	valNotExists(t, "f01", vals)
+	valExists(t, "f02", "test", vals)
+	valNotExists(t, "f03", vals)
+	valNotExists(t, "f04", vals)
+	valNotExists(t, "f05", vals)
+	valNotExists(t, "f06", vals)
+	valExists(t, "f0601", "test", vals)
+	valNotExists(t, "f08", vals)
+	valsExist(t, "f09", []string{"test"}, vals)
+}
+
+type E6 struct {
+	F01 *inner
+	F02 *inner
+	F03 *inner `schema:",omitempty"`
+}
+
+func TestStructPointer(t *testing.T) {
+	vals := map[string][]string{}
+	s := E6{
+		F01: &inner{2},
+	}
+
+	encoder := NewEncoder()
+	encoder.Encode(&s, vals)
+	valExists(t, "F12", "2", vals)
+	valExists(t, "F02", "null", vals)
+	valNotExists(t, "F03", vals)
+}
+
+func TestRegisterEncoderCustomArrayType(t *testing.T) {
+	type CustomInt []int
+	type S1 struct {
+		SomeInts CustomInt `schema:",omitempty"`
+	}
+
+	ss := []S1{
+		{},
+		{CustomInt{}},
+		{CustomInt{1, 2, 3}},
+	}
+
+	for s := range ss {
+		vals := map[string][]string{}
+
+		encoder := NewEncoder()
+		encoder.RegisterEncoder(CustomInt{}, func(value reflect.Value) string {
+			return fmt.Sprint(value.Interface())
+		})
+
+		encoder.Encode(s, vals)
+	}
 }

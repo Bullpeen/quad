@@ -1,18 +1,12 @@
 hash: 8216b76fd5cff1b2a8713a05f512d7027173fdc856492d1e151db839f6e89142
-updated: 2017-10-22T09:26:12.999555-07:00
+updated: 2018-04-08T14:47:25.568675-07:00
 imports:
 - name: github.com/asaskevich/govalidator
-  version: ddb193b4c7bfa1d1c1923ae05a1ee8fb0cd45cf3
+  version: 7d2e70ef918f16bd6455529af38304d6d025c952
 - name: github.com/boltdb/bolt
-  version: e9cf4fae01b5a8ff89d0ec6b32f0d9c9f79aefdd
-- name: github.com/Bullpeen/cointip
-  version: 4c9e4561945fce2a093a25184c3a3439c98fcf37
-  subpackages:
-  - quadlek
-- name: github.com/Bullpeen/infobot
-  version: 32d97d2e9458829e4e64c54aab50ce3a76d23c3b
+  version: fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5
 - name: github.com/cenkalti/backoff
-  version: 309aa717adbf351e92864cbedf9cca0b769a4b5a
+  version: 2ea60e5f094469f9e65adb9cd103795b73ae743e
 - name: github.com/dghubble/go-twitter
   version: c4115fa44a928413e0b857e0eb47376ffde3a61a
   subpackages:
@@ -21,30 +15,43 @@ imports:
   version: 7d51c10e15ca32917b32ce43f6e25840d6951db4
 - name: github.com/dghubble/sling
   version: eb56e89ac5088bebb12eef3cb4b293300f43608b
+- name: github.com/fogleman/gg
+  version: a9ff18eccd6d57b3c8576a71a91a04868f62078c
 - name: github.com/go-openapi/analysis
-  version: 8ed83f2ea9f00f945516462951a288eaa68bf0d6
+  version: f59a71f0ece6f9dfb438be7f45148f006cbad88e
 - name: github.com/go-openapi/errors
-  version: 03cfca65330da08a5a440053faf994a3c682b5bf
+  version: 7bcb96a367bac6b76e6e42fa84155bb5581dcff8
 - name: github.com/go-openapi/jsonpointer
-  version: 779f45308c19820f1a69e9a4cd965f496e0da10f
+  version: 3a0015ad55fa9873f41605d3e8f28cd279c32ab2
 - name: github.com/go-openapi/jsonreference
-  version: 36d33bfe519efae5632669801b180bf1a245da3b
+  version: 3fb327e6747da3043567ee86abd02bb6376b6be2
 - name: github.com/go-openapi/loads
-  version: c3e1ca4c0b6160cac10aeef7e8b425cc95b9c820
+  version: 2a2b323bab96e6b1fdee110e57d959322446e9c9
 - name: github.com/go-openapi/runtime
-  version: e8231e16de5bcda9839e03ae07c5c96a1fd82041
+  version: 62281b694b396a17fe3e4313ee8b0ca2c3cca719
   subpackages:
   - client
+  - logger
+  - middleware
+  - middleware/denco
+  - middleware/header
+  - middleware/untyped
+  - security
 - name: github.com/go-openapi/spec
-  version: 84b5bee7bcb76f3d17bcbaf421bac44bd5709ca6
+  version: 370d9e047557906322be8396e77cb0376be6cb96
 - name: github.com/go-openapi/strfmt
-  version: 610b6cacdcde6852f4de68998bd20ce1dac85b22
+  version: 481808443b00a14745fada967cb5eeff0f9b1df2
 - name: github.com/go-openapi/swag
-  version: f3f9494671f93fcff853e3c6e9e948b3eb71e590
+  version: 811b1089cde9dad18d4d0c2d09fbdbf28dbd27a5
 - name: github.com/go-openapi/validate
-  version: b6cfc35bf312e6fb320d85ed9fc3ac408dcb8694
+  version: 180bba53b98899f743a112e568bed9e2ef31aa20
+- name: github.com/golang/freetype
+  version: e2365dfdc4a05e4b8299a783240d4a7d5a65d4e4
+  subpackages:
+  - raster
+  - truetype
 - name: github.com/golang/protobuf
-  version: 130e6b02ab059e7b717a096f397c5b60111cae74
+  version: e09c5db296004fbe3f74490e84dcd62c3c5ddb1b
   subpackages:
   - proto
 - name: github.com/google/go-querystring
@@ -54,20 +61,25 @@ imports:
 - name: github.com/gorilla/context
   version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
 - name: github.com/gorilla/mux
-  version: 8c683ee571b6ee7ffc9f1cafd13103c422e71cbf
+  version: 94231ffd98496cbcb1c15b7bf2a9edfd5f852cd4
 - name: github.com/gorilla/schema
-  version: 8b1100835db5bbdae88541510f70d114b91a7e4d
-- name: github.com/jirwin/factpacks
-  version: 29b584ec6208f2964fc6097e23508905bf09bdff
+  version: d0e4c24cff97ae983e9847e0ed5a02dc10013d41
+- name: github.com/gorilla/websocket
+  version: eb925808374e5ca90c83401a40d711dc08c0c0f6
+- name: github.com/jirwin/comics
+  version: 43822d8acb7c69fdf398ce7b459291b5e57414a5
+  subpackages:
+  - src/comics
 - name: github.com/jirwin/ipfs-archive
   version: 813689260755b9a10dd656b50a40223ff2706308
   subpackages:
   - client/ipfs
   - models
 - name: github.com/jirwin/quadlek
-  version: aa438e223dc57c1ae09b797a69a0cfe752644894
+  version: 245c9f917d98fdd021f49a005f64230e77f74bdc
   subpackages:
   - plugins/archive
+  - plugins/comics
   - plugins/echo
   - plugins/karma
   - plugins/nextep
@@ -76,56 +88,65 @@ imports:
   - plugins/twitter
   - quadlek
 - name: github.com/mailru/easyjson
-  version: efb36c3268025336c3cdd805e3be5f88d1f62b73
+  version: 8b799c424f57fa123fc63a99d6383bc6e4c02578
   subpackages:
   - buffer
   - jlexer
   - jwriter
+- name: github.com/mattn/go-scan
+  version: c32d62d79bafeac8906774425844a0e03470316f
 - name: github.com/mitchellh/mapstructure
-  version: 06020f85339e21b2478f756a78e295255ffa4d6a
+  version: 00c29f56e2386353d58c599509e8dc3801b0d716
 - name: github.com/morgabra/cointip
   version: d9a0663739d870b94b8b3873ba61733d2054a941
   subpackages:
   - quadlek
 - name: github.com/nlopes/slack
-  version: 5cde21b8b96a43fc3435a1f514123d14fd7eabdc
+  version: a22b9657ebc0b4948d7b3a13957c9b75aa55c54c
 - name: github.com/PuerkitoBio/purell
-  version: fd18e053af8a4ff11039269006e8037ff374ce0e
+  version: 975f53781597ed779763b7b65566e74c4004d8de
 - name: github.com/PuerkitoBio/urlesc
   version: de5bf2ad457846296e2031421a34e2568e304e35
 - name: github.com/purdyk/tvdb
   version: 80f06ad52285ea31a6d45bdc1f74006bcc39d905
 - name: github.com/satori/go.uuid
-  version: 5bf94b69c6b68ee1b541973bb8e1144db23a194b
+  version: 36e9d2ebbde5e3f13ab2e25625fd453271d6522e
 - name: github.com/Sirupsen/logrus
-  version: 89742aefa4b206dcf400792f3bd35b542998eb3b
+  version: 778f2e774c725116edbc3d039dc0dfc1cc62aae8
   repo: https://github.com/sirupsen/logrus
 - name: github.com/urfave/cli
-  version: cf33a9befefdd6c6ea1a236ab6d546e797a62cbf
+  version: 8e01ec4cd3e2d84ab2fe90d8210528ffbb06d8ff
 - name: github.com/zmb3/spotify
-  version: 9832ad1cfcf12935e2c585242104695ad5e382a9
+  version: 79deba8533f6a0e6545b3937667522d323aa6754
 - name: golang.org/x/crypto
-  version: 541b9d50ad47e36efd8fb423e938e59ff1691f68
+  version: b2aa35443fbc700ab74c586ae79b81c171851023
   subpackages:
   - ssh/terminal
+- name: golang.org/x/image
+  version: f315e440302883054d0c2bd85486878cb4f8572c
+  subpackages:
+  - draw
+  - font
+  - font/basicfont
+  - math/f64
+  - math/fixed
 - name: golang.org/x/net
-  version: 30f03014b4f11f9f238fdeca8cca734746a24fbb
+  version: 61147c48b25b599e5b561d2e9c4f3e1ef489ca41
   subpackages:
   - context
   - context/ctxhttp
   - idna
-  - websocket
 - name: golang.org/x/oauth2
-  version: bb50c06baba3d0c76f9d125c0719093e315b5b44
+  version: 921ae394b9430ed4fb549668d7b087601bd60a81
   subpackages:
   - internal
 - name: golang.org/x/sys
-  version: 8dbc5d05d6edcc104950cc299a1ce6641235bc86
+  version: 3b87a42e500a6dc65dae1a55d0b641295971163e
   subpackages:
   - unix
   - windows
 - name: golang.org/x/text
-  version: c01e4764d870b77f8abe5096ee19ad20d80e8075
+  version: 2cb43934f0eece38629746959acc633cba083fe4
   subpackages:
   - secure/bidirule
   - transform
@@ -133,7 +154,7 @@ imports:
   - unicode/norm
   - width
 - name: google.golang.org/appengine
-  version: a2e0dc829727a4f957a7428b1f322805cfc1f362
+  version: 0a24098c0ec68416ec050f567f75df563d6b231e
   subpackages:
   - internal
   - internal/base
@@ -148,5 +169,5 @@ imports:
   - bson
   - internal/json
 - name: gopkg.in/yaml.v2
-  version: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
+  version: 5420a8b6744d3b0345ab293f6fcba19c978f1183
 testImports: []

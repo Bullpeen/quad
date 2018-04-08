@@ -1657,3 +1657,113 @@ func TestRegisterConverterOverridesTextUnmarshaler(t *testing.T) {
 		t.Errorf("s1.Aa: expected %v, got %v", ts, s1.MyTime)
 	}
 }
+
+type S20E string
+
+func (e *S20E) UnmarshalText(text []byte) error {
+	*e = S20E("x")
+	return nil
+}
+
+type S20 []S20E
+
+func (s *S20) UnmarshalText(text []byte) error {
+	*s = S20{"a", "b", "c"}
+	return nil
+}
+
+// Test to ensure that when a custom type based on a slice implements an
+// encoding.TextUnmarshaler interface that it takes precedence over any
+// implementations by its elements.
+func TestTextUnmarshalerTypeSlice(t *testing.T) {
+	data := map[string][]string{
+		"Value": []string{"a,b,c"},
+	}
+	s := struct {
+		Value S20
+	}{}
+	decoder := NewDecoder()
+	if err := decoder.Decode(&s, data); err != nil {
+		t.Fatal("Error while decoding:", err)
+	}
+	expected := S20{"a", "b", "c"}
+	if !reflect.DeepEqual(expected, s.Value) {
+		t.Errorf("Expected %v errors, got %v", expected, s.Value)
+	}
+}
+
+type S21E struct{ ElementValue string }
+
+func (e *S21E) UnmarshalText(text []byte) error {
+	*e = S21E{"x"}
+	return nil
+}
+
+type S21 []S21E
+
+func (s *S21) UnmarshalText(text []byte) error {
+	*s = S21{{"a"}}
+	return nil
+}
+
+type S21B []S21E
+
+// Test to ensure that if custom type base on a slice of structs implements an
+// encoding.TextUnmarshaler interface it is unaffected by the special path
+// requirements imposed on a slice of structs.
+func TestTextUnmarshalerTypeSliceOfStructs(t *testing.T) {
+	data := map[string][]string{
+		"Value": []string{"raw a"},
+	}
+	// Implements encoding.TextUnmarshaler, should not throw invalid path
+	// error.
+	s := struct {
+		Value S21
+	}{}
+	decoder := NewDecoder()
+	if err := decoder.Decode(&s, data); err != nil {
+		t.Fatal("Error while decoding:", err)
+	}
+	expected := S21{{"a"}}
+	if !reflect.DeepEqual(expected, s.Value) {
+		t.Errorf("Expected %v errors, got %v", expected, s.Value)
+	}
+	// Does not implement encoding.TextUnmarshaler, should throw invalid
+	// path error.
+	sb := struct {
+		Value S21B
+	}{}
+	if err := decoder.Decode(&sb, data); err == invalidPath {
+		t.Fatal("Expecting invalid path error", err)
+	}
+}
+
+type S22 string
+
+func (s *S22) UnmarshalText(text []byte) error {
+	*s = S22("a")
+	return nil
+}
+
+// Test to ensure that when a field that should be decoded into a type
+// implementing the encoding.TextUnmarshaler interface is set to an empty value
+// that the UnmarshalText method is utilized over other methods of decoding,
+// especially including simply setting the zero value.
+func TestTextUnmarshalerEmpty(t *testing.T) {
+	data := map[string][]string{
+		"Value": []string{""}, // empty value
+	}
+	// Implements encoding.TextUnmarshaler, should use the type's
+	// UnmarshalText method.
+	s := struct {
+		Value S22
+	}{}
+	decoder := NewDecoder()
+	if err := decoder.Decode(&s, data); err != nil {
+		t.Fatal("Error while decoding:", err)
+	}
+	expected := S22("a")
+	if expected != s.Value {
+		t.Errorf("Expected %v errors, got %v", expected, s.Value)
+	}
+}
