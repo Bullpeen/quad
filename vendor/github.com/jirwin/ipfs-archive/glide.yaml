@@ -1,3 +1,0 @@
-package: github.com/jirwin/ipfs-archive
-import:
-- package: gopkg.in/urfave/cli.v1
