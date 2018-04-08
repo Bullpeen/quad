@@ -19,6 +19,7 @@ import (
 
 	"fmt"
 
+	"github.com/Bullpeen/infobot"
 	"github.com/urfave/cli"
 )
 

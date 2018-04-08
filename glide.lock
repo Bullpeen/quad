@@ -1,10 +1,12 @@
 hash: 0817835f550e07efb5fd0f0fe9e3a5a7ca0ecae74a3138073c701a08b7d1a71b
-updated: 2018-04-08T15:06:38.480968-07:00
+updated: 2018-04-08T15:10:28.564274-07:00
 imports:
 - name: github.com/asaskevich/govalidator
   version: 7d2e70ef918f16bd6455529af38304d6d025c952
 - name: github.com/boltdb/bolt
   version: fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5
+- name: github.com/Bullpeen/infobot
+  version: 32d97d2e9458829e4e64c54aab50ce3a76d23c3b
 - name: github.com/cenkalti/backoff
   version: 2ea60e5f094469f9e65adb9cd103795b73ae743e
 - name: github.com/dghubble/go-twitter
@@ -70,6 +72,8 @@ imports:
   version: 43822d8acb7c69fdf398ce7b459291b5e57414a5
   subpackages:
   - src/comics
+- name: github.com/jirwin/factpacks
+  version: 29b584ec6208f2964fc6097e23508905bf09bdff
 - name: github.com/jirwin/ipfs-archive
   version: 813689260755b9a10dd656b50a40223ff2706308
   subpackages:
