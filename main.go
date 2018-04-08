@@ -2,13 +2,12 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"os/signal"
 
-	cointip "github.com/Bullpeen/cointip/quadlek"
 	log "github.com/Sirupsen/logrus"
 	"github.com/jirwin/quadlek/plugins/archive"
+	"github.com/jirwin/quadlek/plugins/comics"
 	"github.com/jirwin/quadlek/plugins/echo"
 	"github.com/jirwin/quadlek/plugins/karma"
 	"github.com/jirwin/quadlek/plugins/nextep"
@@ -16,8 +15,10 @@ import (
 	"github.com/jirwin/quadlek/plugins/spotify"
 	"github.com/jirwin/quadlek/plugins/twitter"
 	"github.com/jirwin/quadlek/quadlek"
+	cointip "github.com/morgabra/cointip/quadlek"
 
-	"github.com/Bullpeen/infobot"
+	"fmt"
+
 	"github.com/urfave/cli"
 )
 
@@ -109,7 +110,7 @@ func run(c *cli.Context) error {
 			"976366106561490944": "artfolio", // @DrawnDavidsOff
 			"921111554371682304": "artfolio", // @DrawnDavidson
 			//added for retweet testing
-			"778682":   "quadlek-chat", // @jirwin
+			"778682": "quadlek-chat", // @jirwin
 
 		},
 	))
@@ -124,6 +125,15 @@ func run(c *cli.Context) error {
 		if err != nil {
 			panic(err)
 		}
+	}
+
+	err = bot.RegisterPlugin(comics.Register(
+		c.String("imgur-client-id"),
+		"/opt/quad-assets/Arial.ttf",
+	))
+	if err != nil {
+		fmt.Printf("error registering comic plugin: %s", err.Error())
+		return err
 	}
 
 	signals := make(chan os.Signal, 1)
@@ -198,6 +208,11 @@ func main() {
 			Name:   "coinbase-account",
 			Usage:  "The bank account for the coinbase api",
 			EnvVar: "QUADLEK_COINBASE_BANK_ACCOUNT",
+		},
+		cli.StringFlag{
+			Name:   "imgur-client-id",
+			Usage:  "The imgur client id",
+			EnvVar: "QUADLEK_IMGUR_CLIENT_ID",
 		},
 	}
 
