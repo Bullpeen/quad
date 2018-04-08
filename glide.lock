@@ -1,5 +1,5 @@
-hash: 8216b76fd5cff1b2a8713a05f512d7027173fdc856492d1e151db839f6e89142
-updated: 2018-04-08T14:47:25.568675-07:00
+hash: 0817835f550e07efb5fd0f0fe9e3a5a7ca0ecae74a3138073c701a08b7d1a71b
+updated: 2018-04-08T14:59:38.729096-07:00
 imports:
 - name: github.com/asaskevich/govalidator
   version: 7d2e70ef918f16bd6455529af38304d6d025c952
@@ -14,7 +14,7 @@ imports:
 - name: github.com/dghubble/oauth1
   version: 7d51c10e15ca32917b32ce43f6e25840d6951db4
 - name: github.com/dghubble/sling
-  version: eb56e89ac5088bebb12eef3cb4b293300f43608b
+  version: 80ec33c6152a53edb5545864ca37567b506c4ca5
 - name: github.com/fogleman/gg
   version: a9ff18eccd6d57b3c8576a71a91a04868f62078c
 - name: github.com/go-openapi/analysis

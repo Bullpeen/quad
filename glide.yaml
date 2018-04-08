@@ -10,6 +10,7 @@ import:
   - plugins/random
   - plugins/spotify
   - plugins/twitter
+  - plugins/comics
   - quadlek
 - package: github.com/urfave/cli
 - package: github.com/morgabra/cointip
