@@ -1,5 +1,5 @@
-hash: 0817835f550e07efb5fd0f0fe9e3a5a7ca0ecae74a3138073c701a08b7d1a71b
-updated: 2018-04-08T15:10:28.564274-07:00
+hash: b90eb305ef90587fb7a9a68d8f5b9adc00838e7dde034188f4c6ab4a7436a0d5
+updated: 2018-04-09T15:44:15.253806-07:00
 imports:
 - name: github.com/asaskevich/govalidator
   version: 7d2e70ef918f16bd6455529af38304d6d025c952
@@ -80,7 +80,7 @@ imports:
   - client/ipfs
   - models
 - name: github.com/jirwin/quadlek
-  version: 9cb603e5ab9c55fe67be48f6356710a7b82d81e0
+  version: a0ced007149ecb7a642e2531e111851c866c1774
   subpackages:
   - plugins/archive
   - plugins/comics
@@ -123,7 +123,7 @@ imports:
 - name: github.com/zmb3/spotify
   version: 79deba8533f6a0e6545b3937667522d323aa6754
 - name: golang.org/x/crypto
-  version: b2aa35443fbc700ab74c586ae79b81c171851023
+  version: beb2a9779c3b677077c41673505f150149fce895
   subpackages:
   - ssh/terminal
 - name: golang.org/x/image
