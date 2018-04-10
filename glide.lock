@@ -1,5 +1,5 @@
 hash: b90eb305ef90587fb7a9a68d8f5b9adc00838e7dde034188f4c6ab4a7436a0d5
-updated: 2018-04-09T15:44:15.253806-07:00
+updated: 2018-04-10T09:55:16.150564-07:00
 imports:
 - name: github.com/asaskevich/govalidator
   version: 7d2e70ef918f16bd6455529af38304d6d025c952
@@ -80,7 +80,7 @@ imports:
   - client/ipfs
   - models
 - name: github.com/jirwin/quadlek
-  version: a0ced007149ecb7a642e2531e111851c866c1774
+  version: d6f88b3c06d3b58b7d6d72aea35188eee0ca1643
   subpackages:
   - plugins/archive
   - plugins/comics
@@ -150,7 +150,7 @@ imports:
   - unix
   - windows
 - name: golang.org/x/text
-  version: 2cb43934f0eece38629746959acc633cba083fe4
+  version: 367d765ae293e2b5781a597dd9d433117e82fc51
   subpackages:
   - secure/bidirule
   - transform
