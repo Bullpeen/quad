@@ -108,7 +108,6 @@ func run(c *cli.Context) error {
 			"25073877":           "politics", // @realDonaldTrump
 			"822215679726100480": "politics", // @POTUS
 			"830896623689547776": "politics", // @PresVillain
-			"3223426134":         "politics", // @SethAbramson
 			"976366106561490944": "artfolio", // @DrawnDavidsOff
 			"921111554371682304": "artfolio", // @DrawnDavidson
 			//added for retweet testing
