@@ -1,18 +1,171 @@
 package: github.com/Bullpeen/quad
 import:
-- package: github.com/Sirupsen/logrus
-  repo: https://github.com/sirupsen/logrus
+- package: github.com/asaskevich/govalidator
+  version: origin/master
+- package: github.com/boltdb/bolt
+  version: origin/master
+- package: github.com/Bullpeen/infobot
+  version: origin/master
+- package: github.com/cenkalti/backoff
+  version: origin/master
+- package: github.com/dghubble/go-twitter
+  version: origin/master
+  subpackages:
+  - twitter
+- package: github.com/dghubble/oauth1
+  version: origin/master
+- package: github.com/dghubble/sling
+  version: origin/master
+- package: github.com/fogleman/gg
+  version: origin/master
+- package: github.com/go-openapi/analysis
+  version: origin/master
+- package: github.com/go-openapi/errors
+  version: origin/master
+- package: github.com/go-openapi/jsonpointer
+  version: origin/master
+- package: github.com/go-openapi/jsonreference
+  version: origin/master
+- package: github.com/go-openapi/loads
+  version: origin/master
+- package: github.com/go-openapi/runtime
+  version: origin/master
+  subpackages:
+  - client
+  - logger
+  - middleware
+  - middleware/denco
+  - middleware/header
+  - middleware/untyped
+  - security
+- package: github.com/go-openapi/spec
+  version: origin/master
+- package: github.com/go-openapi/strfmt
+  version: origin/master
+- package: github.com/go-openapi/swag
+  version: origin/master
+- package: github.com/go-openapi/validate
+  version: origin/master
+- package: github.com/golang/freetype
+  version: origin/master
+  subpackages:
+  - raster
+  - truetype
+- package: github.com/golang/protobuf
+  version: origin/master
+  subpackages:
+  - proto
+- package: github.com/google/go-querystring
+  version: origin/master
+  subpackages:
+  - query
+- package: github.com/gorilla/context
+  version: origin/master
+- package: github.com/gorilla/mux
+  version: origin/master
+- package: github.com/gorilla/schema
+  version: origin/master
+- package: github.com/gorilla/websocket
+  version: origin/master
+- package: github.com/jirwin/comics
+  version: origin/master
+  subpackages:
+  - src/comics
+- package: github.com/jirwin/factpacks
+  version: origin/master
+- package: github.com/jirwin/ipfs-archive
+  version: origin/master
+  subpackages:
+  - client/ipfs
+  - models
 - package: github.com/jirwin/quadlek
   subpackages:
+  - plugins/archive
+  - plugins/comics
   - plugins/echo
   - plugins/karma
   - plugins/nextep
   - plugins/random
   - plugins/spotify
   - plugins/twitter
-  - plugins/comics
   - quadlek
-- package: github.com/urfave/cli
+- package: github.com/mailru/easyjson
+  version: origin/master
+  subpackages:
+  - buffer
+  - jlexer
+  - jwriter
+- package: github.com/mattn/go-scan
+  version: origin/master
+- package: github.com/mitchellh/mapstructure
+  version: origin/master
 - package: github.com/morgabra/cointip
   subpackages:
   - quadlek
+- package: github.com/nlopes/slack
+  version: origin/master
+- package: github.com/PuerkitoBio/purell
+  version: origin/master
+- package: github.com/PuerkitoBio/urlesc
+  version: origin/master
+- package: github.com/purdyk/tvdb
+  version: origin/master
+- package: github.com/satori/go.uuid
+  version: origin/master
+- package: github.com/Sirupsen/logrus
+  repo: https://github.com/sirupsen/logrus
+- package: github.com/urfave/cli
+- package: github.com/zmb3/spotify
+  version: origin/master
+- package: golang.org/x/crypto
+  version: origin/master
+  subpackages:
+  - ssh/terminal
+- package: golang.org/x/image
+  version: origin/master
+  subpackages:
+  - draw
+  - font
+  - font/basicfont
+  - math/f64
+  - math/fixed
+- package: golang.org/x/net
+  version: origin/master
+  subpackages:
+  - context
+  - context/ctxhttp
+  - idna
+- package: golang.org/x/oauth2
+  version: origin/master
+  subpackages:
+  - internal
+- package: golang.org/x/sys
+  version: origin/master
+  subpackages:
+  - unix
+  - windows
+- package: golang.org/x/text
+  version: origin/master
+  subpackages:
+  - secure/bidirule
+  - transform
+  - unicode/bidi
+  - unicode/norm
+  - width
+- package: google.golang.org/appengine
+  version: origin/master
+  subpackages:
+  - internal
+  - internal/base
+  - internal/datastore
+  - internal/log
+  - internal/remote_api
+  - internal/urlfetch
+  - urlfetch
+- package: gopkg.in/mgo.v2
+  version: origin/master
+  subpackages:
+  - bson
+  - internal/json
+- package: gopkg.in/yaml.v2
+  version: origin/master

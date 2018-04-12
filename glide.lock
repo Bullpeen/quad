@@ -1,5 +1,5 @@
 hash: b90eb305ef90587fb7a9a68d8f5b9adc00838e7dde034188f4c6ab4a7436a0d5
-updated: 2018-04-10T09:55:16.150564-07:00
+updated: 2018-04-11T23:41:04.787574-07:00
 imports:
 - name: github.com/asaskevich/govalidator
   version: 7d2e70ef918f16bd6455529af38304d6d025c952
@@ -80,11 +80,12 @@ imports:
   - client/ipfs
   - models
 - name: github.com/jirwin/quadlek
-  version: d6f88b3c06d3b58b7d6d72aea35188eee0ca1643
+  version: fb929891ad7ed58d5bbac31c9ad8af1049580cb5
   subpackages:
   - plugins/archive
   - plugins/comics
   - plugins/echo
+  - plugins/eslogs
   - plugins/karma
   - plugins/nextep
   - plugins/random
@@ -106,7 +107,9 @@ imports:
   subpackages:
   - quadlek
 - name: github.com/nlopes/slack
-  version: a22b9657ebc0b4948d7b3a13957c9b75aa55c54c
+  version: 921a31ba7374bbc3623a5327e1f965628d1d6108
+- name: github.com/pkg/errors
+  version: 816c9085562cd7ee03e7f8188a1cfd942858cded
 - name: github.com/PuerkitoBio/purell
   version: 975f53781597ed779763b7b65566e74c4004d8de
 - name: github.com/PuerkitoBio/urlesc
@@ -123,7 +126,7 @@ imports:
 - name: github.com/zmb3/spotify
   version: 79deba8533f6a0e6545b3937667522d323aa6754
 - name: golang.org/x/crypto
-  version: beb2a9779c3b677077c41673505f150149fce895
+  version: d6449816ce06963d9d136eee5a56fca5b0616e7e
   subpackages:
   - ssh/terminal
 - name: golang.org/x/image
@@ -150,7 +153,7 @@ imports:
   - unix
   - windows
 - name: golang.org/x/text
-  version: 367d765ae293e2b5781a597dd9d433117e82fc51
+  version: 7922cc490dd5a7dbaa7fd5d6196b49db59ac042f
   subpackages:
   - secure/bidirule
   - transform
@@ -172,6 +175,11 @@ imports:
   subpackages:
   - bson
   - internal/json
+- name: gopkg.in/olivere/elastic.v5
+  version: dbe820f35164384c998099db63481b583d53f73b
+  subpackages:
+  - config
+  - uritemplates
 - name: gopkg.in/yaml.v2
   version: 5420a8b6744d3b0345ab293f6fcba19c978f1183
 testImports: []

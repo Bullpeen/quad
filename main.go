@@ -9,6 +9,7 @@ import (
 	"github.com/jirwin/quadlek/plugins/archive"
 	"github.com/jirwin/quadlek/plugins/comics"
 	"github.com/jirwin/quadlek/plugins/echo"
+	"github.com/jirwin/quadlek/plugins/eslogs"
 	"github.com/jirwin/quadlek/plugins/karma"
 	"github.com/jirwin/quadlek/plugins/nextep"
 	"github.com/jirwin/quadlek/plugins/random"
@@ -54,31 +55,31 @@ func run(c *cli.Context) error {
 
 	err = bot.RegisterPlugin(echo.Register())
 	if err != nil {
-		fmt.Printf("error registering echo plugin: %s", err.Error())
+		fmt.Printf("error registering echo plugin: %s\n", err.Error())
 		return nil
 	}
 
 	err = bot.RegisterPlugin(karma.Register())
 	if err != nil {
-		fmt.Printf("error registering karma plugin: %s", err.Error())
+		fmt.Printf("error registering karma plugin: %s\n", err.Error())
 		return nil
 	}
 
 	err = bot.RegisterPlugin(random.Register())
 	if err != nil {
-		fmt.Printf("error registering random plugin: %s", err.Error())
+		fmt.Printf("error registering random plugin: %s\n", err.Error())
 		return nil
 	}
 
 	err = bot.RegisterPlugin(spotify.Register())
 	if err != nil {
-		fmt.Printf("error registering spotify plugin: %s", err.Error())
+		fmt.Printf("error registering spotify plugin: %s\n", err.Error())
 		return nil
 	}
 
 	err = bot.RegisterPlugin(archive.Register())
 	if err != nil {
-		fmt.Printf("error registering archive plugin: %s", err.Error())
+		fmt.Printf("error registering archive plugin: %s\n", err.Error())
 		return nil
 	}
 
@@ -87,14 +88,14 @@ func run(c *cli.Context) error {
 
 		err = bot.RegisterPlugin(nextep.Register(tvdbKey))
 		if err != nil {
-			fmt.Printf("error registering nextep plugin: %s", err.Error())
+			fmt.Printf("error registering nextep plugin: %s\n", err.Error())
 			return nil
 		}
 	}
 
 	err = bot.RegisterPlugin(infobot.Register())
 	if err != nil {
-		fmt.Printf("error registering infobot plugin: %s", err.Error())
+		fmt.Printf("error registering infobot plugin: %s\n", err.Error())
 		return nil
 	}
 
@@ -133,7 +134,17 @@ func run(c *cli.Context) error {
 		"/opt/quad-assets/Arial.ttf",
 	))
 	if err != nil {
-		fmt.Printf("error registering comic plugin: %s", err.Error())
+		fmt.Printf("error registering comic plugin: %s\n", err.Error())
+		return err
+	}
+	esPlugin, err := eslogs.Register(c.String("es-endpoint"), c.String("es-index"))
+	if err != nil {
+		fmt.Printf("Error creating eslogs plugin: %s\n", err.Error())
+		return err
+	}
+	err = bot.RegisterPlugin(esPlugin)
+	if err != nil {
+		fmt.Printf("Error registering eslogs plugin: %s\n", err.Error())
 		return err
 	}
 
@@ -214,6 +225,16 @@ func main() {
 			Name:   "imgur-client-id",
 			Usage:  "The imgur client id",
 			EnvVar: "QUADLEK_IMGUR_CLIENT_ID",
+		},
+		cli.StringFlag{
+			Name:   "es-endpoint",
+			Usage:  "The elastic search endpoint",
+			EnvVar: "QUADLEK_ES_ENDPOINT",
+		},
+		cli.StringFlag{
+			Name:   "es-index",
+			Usage:  "The elastic search index",
+			EnvVar: "QUADLEK_ES_INDEX",
 		},
 	}
 
