@@ -1,5 +1,5 @@
 hash: 90468956b363f11d6236f2466c6ae621f02b5013a106a024fe3c1f54c9b60e76
-updated: 2018-04-12T00:30:31.727004-07:00
+updated: 2018-04-12T00:38:47.315073-07:00
 imports:
 - name: github.com/asaskevich/govalidator
   version: 7d2e70ef918f16bd6455529af38304d6d025c952
@@ -80,7 +80,7 @@ imports:
   - client/ipfs
   - models
 - name: github.com/jirwin/quadlek
-  version: 570eb63a1bb86b74478997123aa2bee9b8970115
+  version: 7ec1f5233cede2c122ca3b08cd655ba37bc217f1
   subpackages:
   - plugins/archive
   - plugins/comics
