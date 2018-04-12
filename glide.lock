@@ -1,5 +1,5 @@
-hash: b90eb305ef90587fb7a9a68d8f5b9adc00838e7dde034188f4c6ab4a7436a0d5
-updated: 2018-04-11T23:41:04.787574-07:00
+hash: 90468956b363f11d6236f2466c6ae621f02b5013a106a024fe3c1f54c9b60e76
+updated: 2018-04-12T00:15:45.803212-07:00
 imports:
 - name: github.com/asaskevich/govalidator
   version: 7d2e70ef918f16bd6455529af38304d6d025c952
@@ -80,7 +80,7 @@ imports:
   - client/ipfs
   - models
 - name: github.com/jirwin/quadlek
-  version: fb929891ad7ed58d5bbac31c9ad8af1049580cb5
+  version: d3caa74ee93ae260150ada2b545cd41be3c566e0
   subpackages:
   - plugins/archive
   - plugins/comics
