@@ -6,6 +6,8 @@ import:
   version: origin/master
 - package: github.com/Bullpeen/infobot
   version: origin/master
+- package: github.com/Bullpeen/stox
+  version: origin/master
 - package: github.com/cenkalti/backoff
   version: origin/master
 - package: github.com/dghubble/go-twitter
