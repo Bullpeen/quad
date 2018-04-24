@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/signal"
 
+	"github.com/Bullpeen/stox"
 	log "github.com/Sirupsen/logrus"
 	"github.com/jirwin/quadlek/plugins/archive"
 	"github.com/jirwin/quadlek/plugins/comics"
@@ -16,7 +17,6 @@ import (
 	"github.com/jirwin/quadlek/plugins/spotify"
 	"github.com/jirwin/quadlek/plugins/twitter"
 	"github.com/jirwin/quadlek/quadlek"
-	"github.com/Bullpeen/stox"
 	cointip "github.com/morgabra/cointip/quadlek"
 
 	"fmt"
@@ -149,10 +149,7 @@ func run(c *cli.Context) error {
 		return err
 	}
 
-	stoxPlugin, err := stox.Register(c.String("av-key"))
-	if err != nil {
-		fmt.Printf("Error creating stox plugin: %s\n", err.Error())
-	}
+	stoxPlugin := stox.Register(c.String("av-key"))
 	err = bot.RegisterPlugin(stoxPlugin)
 	if err != nil {
 		fmt.Printf("Error registering stox plugin: %s\n", err.Error())
@@ -247,8 +244,8 @@ func main() {
 			EnvVar: "QUADLEK_ES_INDEX",
 		},
 		cli.StringFlag{
-			Name: "av-key",
-			Usage: "Alpha Vantage Api Key",
+			Name:   "av-key",
+			Usage:  "Alpha Vantage Api Key",
 			EnvVar: "QUADLEK_AV_KEY",
 		},
 	}
