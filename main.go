@@ -16,6 +16,7 @@ import (
 	"github.com/jirwin/quadlek/plugins/spotify"
 	"github.com/jirwin/quadlek/plugins/twitter"
 	"github.com/jirwin/quadlek/quadlek"
+	"github.com/Bullpeen/stox"
 	cointip "github.com/morgabra/cointip/quadlek"
 
 	"fmt"
@@ -148,6 +149,15 @@ func run(c *cli.Context) error {
 		return err
 	}
 
+	stoxPlugin, err := stox.Register(c.String("av-key"))
+	if err != nil {
+		fmt.Printf("Error creating stox plugin: %s\n", err.Error())
+	}
+	err = bot.RegisterPlugin(stoxPlugin)
+	if err != nil {
+		fmt.Printf("Error registering stox plugin: %s\n", err.Error())
+	}
+
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
 
@@ -235,6 +245,11 @@ func main() {
 			Name:   "es-index",
 			Usage:  "The elastic search index",
 			EnvVar: "QUADLEK_ES_INDEX",
+		},
+		cli.StringFlag{
+			Name: "av-key",
+			Usage: "Alpha Vantage Api Key",
+			EnvVar: "QUADLEK_AV_KEY",
 		},
 	}
 
