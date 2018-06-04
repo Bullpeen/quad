@@ -108,10 +108,10 @@ func run(c *cli.Context) error {
 		// These must be twitter user ids, not names. https://tweeterid.com/ for easy conversion between the two.
 		map[string]string{
 			"25073877":           "politics", // @realDonaldTrump
-			"822215679726100480": "politics", // @POTUS
 			"830896623689547776": "politics", // @PresVillain
 			"976366106561490944": "artfolio", // @DrawnDavidsOff
 			"921111554371682304": "artfolio", // @DrawnDavidson
+			"1581511":            "wwdc",     //@macrumorslive
 			//added for retweet testing
 			"778682": "quadlek-chat", // @jirwin
 
