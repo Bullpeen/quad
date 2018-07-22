@@ -17,3 +17,4 @@ quadlek.db
 quadlekBot
 *.retry
 vendor
+*.env

@@ -5,8 +5,12 @@ import (
 	"os"
 	"os/signal"
 
+	"fmt"
+
+	"github.com/Bullpeen/infobot"
 	"github.com/Bullpeen/stox"
 	log "github.com/Sirupsen/logrus"
+	"github.com/jirwin/gifs-quadlek/src"
 	"github.com/jirwin/quadlek/plugins/archive"
 	"github.com/jirwin/quadlek/plugins/comics"
 	"github.com/jirwin/quadlek/plugins/echo"
@@ -18,10 +22,6 @@ import (
 	"github.com/jirwin/quadlek/plugins/twitter"
 	"github.com/jirwin/quadlek/quadlek"
 	cointip "github.com/morgabra/cointip/quadlek"
-
-	"fmt"
-
-	"github.com/Bullpeen/infobot"
 	"github.com/urfave/cli"
 )
 
@@ -153,6 +153,14 @@ func run(c *cli.Context) error {
 	err = bot.RegisterPlugin(stoxPlugin)
 	if err != nil {
 		fmt.Printf("Error registering stox plugin: %s\n", err.Error())
+		return err
+	}
+
+	gifPlugin := gifs.Register(c.String("giphy-api-key"))
+	err = bot.RegisterPlugin(gifPlugin)
+	if err != nil {
+		fmt.Printf("Error registering gifs plugin: %s\n", err.Error())
+		return err
 	}
 
 	signals := make(chan os.Signal, 1)
@@ -247,6 +255,11 @@ func main() {
 			Name:   "av-key",
 			Usage:  "Alpha Vantage Api Key",
 			EnvVar: "QUADLEK_AV_KEY",
+		},
+		cli.StringFlag{
+			Name:   "giphy-api-key",
+			Usage:  "Giphy API Key",
+			EnvVar: "QUADLEK_GIPHY_KEY",
 		},
 	}
 
