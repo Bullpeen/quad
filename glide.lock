@@ -1,5 +1,5 @@
 hash: afc3b2a722e2d4d0ca0c3dd362263413f497901317b03f739296a3599e711bc9
-updated: 2018-07-22T01:53:57.117202668-07:00
+updated: 2018-07-22T22:51:47.916802478-07:00
 imports:
 - name: github.com/asaskevich/govalidator
   version: f9ffefc3facfbe0caee3fea233cbb6e8208f4541
@@ -8,7 +8,7 @@ imports:
 - name: github.com/Bullpeen/infobot
   version: 32d97d2e9458829e4e64c54aab50ce3a76d23c3b
 - name: github.com/Bullpeen/stox
-  version: 11cf314cc219b2cc14bfb83915709742e17b99f9
+  version: 8c8d6b65076e850f6184f7ad18e73e5066f00ee9
 - name: github.com/cenkalti/backoff
   version: f756bc9a37f808627c8c1b26d2d6ea40c468440b
 - name: github.com/cmckee-dev/go-alpha-vantage
