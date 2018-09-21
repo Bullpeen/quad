@@ -1,5 +1,5 @@
 hash: c90077523f733ce6f738e5abebb369e91a8e52c44f4dd48c8017be3e5f0fcc83
-updated: 2018-09-20T22:23:28.519715873-07:00
+updated: 2018-09-20T22:57:51.561624929-07:00
 imports:
 - name: github.com/asaskevich/govalidator
   version: f9ffefc3facfbe0caee3fea233cbb6e8208f4541
@@ -79,7 +79,7 @@ imports:
 - name: github.com/jirwin/factpacks
   version: 29b584ec6208f2964fc6097e23508905bf09bdff
 - name: github.com/jirwin/gifs-quadlek
-  version: 23600f2bd7a49b8b7bb845ed96315baeb1f969f3
+  version: 85bb51756261fec18391f47deb416edbabf4d21a
   subpackages:
   - src
 - name: github.com/jirwin/ipfs-archive
