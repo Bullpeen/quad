@@ -118,7 +118,7 @@ import:
   repo: https://github.com/sirupsen/logrus
 - package: github.com/urfave/cli
 - package: github.com/zmb3/spotify
-  version: origin/master
+  version: 035b08df67f491832490996ca695229413877afe
 - package: golang.org/x/crypto
   version: origin/master
   subpackages:

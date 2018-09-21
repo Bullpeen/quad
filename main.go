@@ -2,16 +2,14 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"os/signal"
-
-	"fmt"
 
 	"github.com/Bullpeen/infobot"
 	"github.com/Bullpeen/stox"
 	log "github.com/Sirupsen/logrus"
 	"github.com/jirwin/gifs-quadlek/src"
-	"github.com/jirwin/quadlek/plugins/archive"
 	"github.com/jirwin/quadlek/plugins/comics"
 	"github.com/jirwin/quadlek/plugins/echo"
 	"github.com/jirwin/quadlek/plugins/eslogs"
@@ -21,7 +19,7 @@ import (
 	"github.com/jirwin/quadlek/plugins/spotify"
 	"github.com/jirwin/quadlek/plugins/twitter"
 	"github.com/jirwin/quadlek/quadlek"
-	cointip "github.com/morgabra/cointip/quadlek"
+	"github.com/morgabra/cointip/quadlek"
 	"github.com/urfave/cli"
 )
 
@@ -75,12 +73,6 @@ func run(c *cli.Context) error {
 	err = bot.RegisterPlugin(spotify.Register())
 	if err != nil {
 		fmt.Printf("error registering spotify plugin: %s\n", err.Error())
-		return nil
-	}
-
-	err = bot.RegisterPlugin(archive.Register())
-	if err != nil {
-		fmt.Printf("error registering archive plugin: %s\n", err.Error())
 		return nil
 	}
 
