@@ -101,7 +101,7 @@ func run(c *cli.Context) error {
 		map[string]string{
 			"25073877":           "politics", // @realDonaldTrump
 			"830896623689547776": "politics", // @PresVillain
-			"834081571493785600": "politics", // @PreetBharara
+			"934474767645724672": "politics", // @realtrumpweathr
 			"976366106561490944": "artfolio", // @DrawnDavidsOff
 			"921111554371682304": "artfolio", // @DrawnDavidson
 			"1581511":            "wwdc",     //@macrumorslive
