@@ -279,6 +279,11 @@ func main() {
 			Usage:  "Giphy API Key",
 			EnvVar: "QUADLEK_GIPHY_KEY",
 		},
+		cli.StringFlag{
+			Name:   "twitch-oauth-client-id",
+			Usage:  "OAuth application client id for twitch API",
+			EnvVar: "QUADLEK_TWITCH_OAUTH_CLIENT_ID",
+		},
 	}
 
 	app.Run(os.Args)
