@@ -20,6 +20,7 @@ import (
 	"github.com/jirwin/quadlek/plugins/twitter"
 	"github.com/jirwin/quadlek/quadlek"
 	"github.com/morgabra/cointip/quadlek"
+	twitch "github.com/morgabra/libtwitch/quadlek"
 	"github.com/urfave/cli"
 )
 
@@ -156,6 +157,37 @@ func run(c *cli.Context) error {
 		return err
 	}
 
+	twitchFollows := []*twitch.TwitchFollow{
+		{
+			SlackChannels: []string{"vidyagames"},
+			TwitchUser:    "kitboga",
+			WatchStream:   true,
+		},
+		{
+			SlackChannels: []string{"vidyagames"},
+			TwitchUser:    "khryo72",
+			SlackUser:     "morgabra",
+			WatchStream:   true,
+			WatchFollows:  true,
+		},
+		{
+                        SlackChannels: []string{"vidyagames"},
+                        TwitchUser:    "mekilek",
+                        SlackUser:     "jirwin",
+                        WatchStream:   true,
+                        WatchFollows:  true,
+                },
+	}
+
+	twitchPlugin := twitch.Register(c.String("twitch-oauth-client-id"), "", "https://quadlek.jirw.in/slack/plugin/twitch", false, twitchFollows)
+	if twitchPlugin != nil {
+		err = bot.RegisterPlugin(twitchPlugin)
+		if err != nil {
+			fmt.Printf("error registering twitch plugin: %s\n", err.Error())
+			return err
+		}
+	}
+
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
 
@@ -253,6 +285,11 @@ func main() {
 			Name:   "giphy-api-key",
 			Usage:  "Giphy API Key",
 			EnvVar: "QUADLEK_GIPHY_KEY",
+		},
+		cli.StringFlag{
+			Name:   "twitch-oauth-client-id",
+			Usage:  "OAuth application client id for twitch API",
+			EnvVar: "QUADLEK_TWITCH_OAUTH_CLIENT_ID",
 		},
 	}
 

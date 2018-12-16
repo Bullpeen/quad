@@ -116,6 +116,10 @@ imports:
   version: d9a0663739d870b94b8b3873ba61733d2054a941
   subpackages:
   - quadlek
+- name: github.com/morgabra/libtwitch
+  version: acca6bf17b8e684c64d8adbb830579038cd64c43
+  subpackages:
+  - quadlek
 - name: github.com/nlopes/slack
   version: 763c67d4f458f6650057afbab5d033721b2b55db
   subpackages:
