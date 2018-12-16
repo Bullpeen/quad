@@ -158,11 +158,11 @@ func run(c *cli.Context) error {
 	}
 
 	twitchFollows := []*twitch.TwitchFollow{
-		{
-			SlackChannels: []string{"vidyagames"},
-			TwitchUser:    "kitboga",
-			WatchStream:   true,
-		},
+	//	{
+	//		SlackChannels: []string{"vidyagames"},
+	//		TwitchUser:    "kitboga",
+	//		WatchStream:   true,
+	//	},
 		{
 			SlackChannels: []string{"vidyagames"},
 			TwitchUser:    "khryo72",
