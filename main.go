@@ -158,11 +158,11 @@ func run(c *cli.Context) error {
 	}
 
 	twitchFollows := []*twitch.TwitchFollow{
-	//	{
-	//		SlackChannels: []string{"vidyagames"},
-	//		TwitchUser:    "kitboga",
-	//		WatchStream:   true,
-	//	},
+		{
+			SlackChannels: []string{"vidyagames"},
+			TwitchUser:    "kitboga",
+			WatchStream:   true,
+		},
 		{
 			SlackChannels: []string{"vidyagames"},
 			TwitchUser:    "khryo72",
@@ -171,12 +171,12 @@ func run(c *cli.Context) error {
 			WatchFollows:  true,
 		},
 		{
-                        SlackChannels: []string{"vidyagames"},
-                        TwitchUser:    "mekilek",
-                        SlackUser:     "jirwin",
-                        WatchStream:   true,
-                        WatchFollows:  true,
-                },
+			SlackChannels: []string{"vidyagames"},
+			TwitchUser:    "mekilek",
+			SlackUser:     "jirwin",
+			WatchStream:   true,
+			WatchFollows:  true,
+		},
 	}
 
 	twitchPlugin := twitch.Register(c.String("twitch-oauth-client-id"), "", "https://quadlek.jirw.in/slack/plugin/twitch", false, twitchFollows)

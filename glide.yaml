@@ -104,6 +104,10 @@ import:
 - package: github.com/morgabra/cointip
   subpackages:
   - quadlek
+- package: github.com/morgabra/libtwitch
+  repo: https://github.com/jirwin/libtwitch.git
+  subpackages:
+  - quadlek
 - package: github.com/nlopes/slack
   version: origin/master
 - package: github.com/PuerkitoBio/purell

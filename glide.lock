@@ -117,7 +117,8 @@ imports:
   subpackages:
   - quadlek
 - name: github.com/morgabra/libtwitch
-  version: acca6bf17b8e684c64d8adbb830579038cd64c43
+  version: 2462191ed0a0d4610edf38adbdb6af9ae0ba075e
+  repo: https://github.com/jirwin/libtwitch.git
   subpackages:
   - quadlek
 - name: github.com/nlopes/slack
