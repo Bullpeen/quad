@@ -103,6 +103,7 @@ func run(c *cli.Context) error {
 			"25073877":           "politics", // @realDonaldTrump
 			"830896623689547776": "politics", // @PresVillain
 			"934474767645724672": "politics", // @realtrumpweathr
+			"138203134":          "politics", // @AOC
 			"976366106561490944": "artfolio", // @DrawnDavidsOff
 			"921111554371682304": "artfolio", // @DrawnDavidson
 			"1581511":            "wwdc",     //@macrumorslive
