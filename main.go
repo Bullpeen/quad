@@ -6,6 +6,8 @@ import (
 	"os"
 	"os/signal"
 
+	"github.com/jirwin/xpost-quadlek/pkg"
+
 	"github.com/Bullpeen/infobot"
 	"github.com/Bullpeen/stox"
 	log "github.com/Sirupsen/logrus"
@@ -104,9 +106,9 @@ func run(c *cli.Context) error {
 			"830896623689547776": "politics-feed", // @PresVillain
 			"934474767645724672": "politics-feed", // @realtrumpweathr
 			"138203134":          "politics-feed", // @AOC
-			"976366106561490944": "artfolio", // @DrawnDavidsOff
-			"921111554371682304": "artfolio", // @DrawnDavidson
-			"1581511":            "wwdc",     //@macrumorslive
+			"976366106561490944": "artfolio",      // @DrawnDavidsOff
+			"921111554371682304": "artfolio",      // @DrawnDavidson
+			"1581511":            "wwdc",          //@macrumorslive
 			//added for retweet testing
 			"778682": "quadlek-chat", // @jirwin
 
@@ -141,6 +143,13 @@ func run(c *cli.Context) error {
 	err = bot.RegisterPlugin(esPlugin)
 	if err != nil {
 		fmt.Printf("Error registering eslogs plugin: %s\n", err.Error())
+		return err
+	}
+
+	xpostPlugin := xpost.Register()
+	err = bot.RegisterPlugin(xpostPlugin)
+	if err != nil {
+		fmt.Printf("error registering xpost plugin: %s\n", err.Error())
 		return err
 	}
 

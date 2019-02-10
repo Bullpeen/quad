@@ -88,7 +88,7 @@ imports:
   - client/ipfs
   - models
 - name: github.com/jirwin/quadlek
-  version: 73f0c78fbc882b8571bd9b238349fe0587af2767
+  version: 92fd074b9e90cbf6a042227ff93badfeee05dd8e
   subpackages:
   - plugins/archive
   - plugins/comics
@@ -100,6 +100,10 @@ imports:
   - plugins/spotify
   - plugins/twitter
   - quadlek
+- name: github.com/jirwin/xpost-quadlek
+  version: 319004b8e32d957bc19ecae93dc1a44a6bddf8e4
+  subpackages:
+  - pkg
 - name: github.com/konsorten/go-windows-terminal-sequences
   version: b729f2633dfe35f4d1d8a32385f6685610ce1cb5
 - name: github.com/mailru/easyjson
