@@ -9,6 +9,7 @@ import (
 	"github.com/jirwin/xpost-quadlek/pkg"
 
 	"github.com/Bullpeen/infobot"
+	"github.com/Bullpeen/slices"
 	"github.com/Bullpeen/stox"
 	log "github.com/Sirupsen/logrus"
 	"github.com/jirwin/gifs-quadlek/src"
@@ -204,7 +205,13 @@ func run(c *cli.Context) error {
 			return err
 		}
 	}
-
+	
+	err = bot.RegisterPlugin(slices.Register())
+	if err != nil {
+		fmt.Printf("error registering slices plugin: %s\n", err.Error())
+		return nil
+	}
+	
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
 
