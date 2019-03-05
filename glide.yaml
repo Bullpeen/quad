@@ -176,3 +176,4 @@ import:
 - package: gopkg.in/yaml.v2
   version: origin/master
 - package: github.com/jirwin/xpost-quadlek
+- package: github.com/Bullpeen/slices

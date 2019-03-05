@@ -7,6 +7,8 @@ imports:
   version: fd01fc79c553a8e99d512a07e8e0c63d4a3ccfc5
 - name: github.com/Bullpeen/infobot
   version: 32d97d2e9458829e4e64c54aab50ce3a76d23c3b
+- name: github.com/Bullpeen/slices
+  version: 9ac074407d8ae1b0c268d5095cc5c29c59aa7c5e
 - name: github.com/Bullpeen/stox
   version: 8c8d6b65076e850f6184f7ad18e73e5066f00ee9
 - name: github.com/cenkalti/backoff

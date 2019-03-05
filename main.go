@@ -9,6 +9,7 @@ import (
 	"github.com/jirwin/xpost-quadlek/pkg"
 
 	"github.com/Bullpeen/infobot"
+	"github.com/Bullpeen/slices"
 	"github.com/Bullpeen/stox"
 	log "github.com/Sirupsen/logrus"
 	"github.com/jirwin/gifs-quadlek/src"
@@ -204,7 +205,20 @@ func run(c *cli.Context) error {
 			return err
 		}
 	}
-
+	
+	err = bot.RegisterPlugin(slices.Register([]string {
+		"1841289615922336", // sonicdm
+		"76561197976367183", // morgabra
+		"76561198057633471", // greenjeans
+		"76561198002272597", // newsomr
+		"76561197974723967", // purdyk
+		//"76561197969022064", // schonstal?
+	}))
+	if err != nil {
+		fmt.Printf("error registering slices plugin: %s\n", err.Error())
+		return nil
+	}
+	
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
 
