@@ -206,7 +206,14 @@ func run(c *cli.Context) error {
 		}
 	}
 	
-	err = bot.RegisterPlugin(slices.Register())
+	err = bot.RegisterPlugin(slices.Register([]string {
+		"1841289615922336", // sonicdm
+		"76561197976367183", // morgabra
+		"76561198057633471", // greenjeans
+		"76561198002272597", // newsomr
+		"76561197974723967", // purdyk
+		//"76561197969022064", // schonstal?
+	}))
 	if err != nil {
 		fmt.Printf("error registering slices plugin: %s\n", err.Error())
 		return nil
