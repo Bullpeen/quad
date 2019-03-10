@@ -195,6 +195,13 @@ func run(c *cli.Context) error {
 			WatchStream:   true,
 			WatchFollows:  true,
 		},
+		{
+			SlackChannels: []string{"vidyagames"},
+			TwitchUser:    "sakatana",
+			SlackUser:     "saka",
+			WatchStream:   true,
+			WatchFollows:  true,
+		},
 	}
 
 	twitchPlugin := twitch.Register(c.String("twitch-oauth-client-id"), "", "https://quadlek.jirw.in/slack/plugin/twitch", false, twitchFollows)
