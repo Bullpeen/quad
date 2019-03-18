@@ -214,7 +214,7 @@ func run(c *cli.Context) error {
 	}
 	
 	err = bot.RegisterPlugin(slices.Register([]string {
-		"1841289615922336", // sonicdm
+		"76561197980107683", // sonicdm
 		"76561197976367183", // morgabra
 		"76561198057633471", // greenjeans
 		"76561198002272597", // newsomr
