@@ -6,13 +6,13 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/jirwin/xpost-quadlek/pkg"
+  "github.com/jirwin/xpost-quadlek/pkg"
 
 	"github.com/Bullpeen/infobot"
 	"github.com/Bullpeen/slices"
 	"github.com/Bullpeen/stox"
 	log "github.com/Sirupsen/logrus"
-	"github.com/jirwin/gifs-quadlek/src"
+  "github.com/jirwin/gifs-quadlek/src"
 	"github.com/jirwin/quadlek/plugins/comics"
 	"github.com/jirwin/quadlek/plugins/echo"
 	"github.com/jirwin/quadlek/plugins/eslogs"
@@ -107,6 +107,7 @@ func run(c *cli.Context) error {
 			"830896623689547776": "politics-feed", // @PresVillain
 			"934474767645724672": "politics-feed", // @realtrumpweathr
 			"138203134":          "politics-feed", // @AOC
+			"783792992":          "politics-feed", // @IlhanMN
 			"976366106561490944": "artfolio",      // @DrawnDavidsOff
 			"921111554371682304": "artfolio",      // @DrawnDavidson
 			"1581511":            "wwdc",          //@macrumorslive
@@ -219,8 +220,8 @@ func run(c *cli.Context) error {
 			return err
 		}
 	}
-	
-	err = bot.RegisterPlugin(slices.Register([]string {
+
+	err = bot.RegisterPlugin(slices.Register([]string{
 		"76561197980107683", // sonicdm
 		"76561197976367183", // morgabra
 		"76561198057633471", // greenjeans
@@ -232,7 +233,7 @@ func run(c *cli.Context) error {
 		fmt.Printf("error registering slices plugin: %s\n", err.Error())
 		return nil
 	}
-	
+
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
 
