@@ -227,6 +227,7 @@ func run(c *cli.Context) error {
 		"76561198057633471", // greenjeans
 		"76561198002272597", // newsomr
 		"76561197974723967", // purdyk
+		"1967806609958425", // bh
 		//"76561197969022064", // schonstal?
 	}))
 	if err != nil {
