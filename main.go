@@ -103,14 +103,16 @@ func run(c *cli.Context) error {
 		c.String("twitter-access-secret"),
 		// These must be twitter user ids, not names. https://tweeterid.com/ for easy conversion between the two.
 		map[string]string{
-			"25073877":           "politics-feed", // @realDonaldTrump
-			"830896623689547776": "politics-feed", // @PresVillain
-			"934474767645724672": "politics-feed", // @realtrumpweathr
-			"138203134":          "politics-feed", // @AOC
-			"783792992":          "politics-feed", // @IlhanMN
-			"976366106561490944": "artfolio",      // @DrawnDavidsOff
-			"921111554371682304": "artfolio",      // @DrawnDavidson
-			"1581511":            "wwdc",          //@macrumorslive
+			"25073877":            "politics-feed", // @realDonaldTrump
+			"830896623689547776":  "politics-feed", // @PresVillain
+			"934474767645724672":  "politics-feed", // @realtrumpweathr
+			"138203134":           "politics-feed", // @AOC
+			"783792992":           "politics-feed", // @IlhanMN
+			"31013444":            "politics-feed", // @AyannaPressley
+			"1079769536730140672": "politics-feed", // @RepRashida
+			"976366106561490944":  "artfolio",      // @DrawnDavidsOff
+			"921111554371682304":  "artfolio",      // @DrawnDavidson
+			"1581511":             "wwdc",          //@macrumorslive
 			//added for retweet testing
 			"778682": "quadlek-chat", // @jirwin
 
