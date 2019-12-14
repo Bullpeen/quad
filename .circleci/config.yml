@@ -8,8 +8,6 @@ jobs:
       - run:
           name: Build and deploy container
           command: |
-            docker build -t build-img -f Dockerfile.build .
-            docker run --rm -v $PWD/release:/build build-img
             TAG=$CIRCLE_BRANCH
             docker build -t quay.io/dosilek/quadlek:$TAG .
             docker login -u $DOCKER_USER -p $DOCKER_PASS quay.io
