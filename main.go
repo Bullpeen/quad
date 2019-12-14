@@ -6,13 +6,13 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/jirwin/xpost-quadlek/pkg"
+	xpost "github.com/jirwin/xpost-quadlek/pkg"
+	"go.uber.org/zap"
 
 	"github.com/Bullpeen/infobot"
 	"github.com/Bullpeen/slices"
 	"github.com/Bullpeen/stox"
-	log "github.com/Sirupsen/logrus"
-	"github.com/jirwin/gifs-quadlek/src"
+	gifs "github.com/jirwin/gifs-quadlek/src"
 	"github.com/jirwin/quadlek/plugins/comics"
 	"github.com/jirwin/quadlek/plugins/echo"
 	"github.com/jirwin/quadlek/plugins/eslogs"
@@ -22,6 +22,7 @@ import (
 	"github.com/jirwin/quadlek/plugins/spotify"
 	"github.com/jirwin/quadlek/plugins/twitter"
 	"github.com/jirwin/quadlek/quadlek"
+
 	"github.com/morgabra/cointip/quadlek"
 	twitch "github.com/morgabra/libtwitch/quadlek"
 	"github.com/urfave/cli"
@@ -50,9 +51,7 @@ func run(c *cli.Context) error {
 
 	bot, err := quadlek.NewBot(context.Background(), apiToken, verificationToken, dbPath)
 	if err != nil {
-		log.WithFields(log.Fields{
-			"err": err,
-		}).Error("error creating bot")
+		zap.L().Error("error creating bot", zap.Error(err))
 		return nil
 	}
 
@@ -222,21 +221,21 @@ func run(c *cli.Context) error {
 			return err
 		}
 	}
-	
-	err = bot.RegisterPlugin(slices.Register([]string {
+
+	err = bot.RegisterPlugin(slices.Register([]string{
 		"76561197980107683", // sonicdm
 		"76561197976367183", // morgabra
 		"76561198057633471", // greenjeans
 		"76561198002272597", // newsomr
 		"76561197974723967", // purdyk
-		"1967806609958425", // bh
+		"1967806609958425",  // bh
 		//"76561197969022064", // schonstal?
 	}))
 	if err != nil {
 		fmt.Printf("error registering slices plugin: %s\n", err.Error())
 		return nil
 	}
-	
+
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
 
