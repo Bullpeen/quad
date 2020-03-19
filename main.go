@@ -23,7 +23,8 @@ import (
 	"github.com/jirwin/quadlek/plugins/twitter"
 	"github.com/jirwin/quadlek/quadlek"
 
-	"github.com/morgabra/cointip/quadlek"
+	civ6reporter "github.com/morgabra/civ6webhook/quadlek"
+	cointip "github.com/morgabra/cointip/quadlek"
 	twitch "github.com/morgabra/libtwitch/quadlek"
 	"github.com/urfave/cli"
 )
@@ -240,7 +241,16 @@ func run(c *cli.Context) error {
 	}))
 	if err != nil {
 		fmt.Printf("error registering slices plugin: %s\n", err.Error())
-		return nil
+		return err
+	}
+
+	civ6reporterPlugin := civ6reporter.Register([]string{"vidyagames"}, map[string]string{"corporate": "morgabra"})
+	if twitchPlugin != nil {
+		err = bot.RegisterPlugin(civ6reporterPlugin)
+		if err != nil {
+			fmt.Printf("error registering civ6reporter plugin: %s\n", err.Error())
+			return err
+		}
 	}
 
 	signals := make(chan os.Signal, 1)
