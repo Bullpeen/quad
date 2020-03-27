@@ -3,6 +3,8 @@ github.com/Bullpeen/infobot v0.0.0-20191214170509-b4e3681ba4e1 h1:r0EnC72/OxN9Tb
 github.com/Bullpeen/infobot v0.0.0-20191214170509-b4e3681ba4e1/go.mod h1:jzMvM02hRlgHddEEIjQn6S4SJL1fcLhbI3rayCc1TwY=
 github.com/Bullpeen/slices v0.0.0-20191214170555-5d7fb423b365 h1:q1g/prpzLr2RV0vyrY2Xvchd1zqvD9R0iZNPW/5Ydv8=
 github.com/Bullpeen/slices v0.0.0-20191214170555-5d7fb423b365/go.mod h1:dJ2kqXpDDSZtoCVDtiymwtSysDwSjzP2P1vEwiwgHg8=
+github.com/Bullpeen/slices v0.0.0-20200327215130-4b6ba0ae949b h1:59kXj69eJU+EabJAntV+OIFSPP77h6Ptt+9tJ4xmJfY=
+github.com/Bullpeen/slices v0.0.0-20200327215130-4b6ba0ae949b/go.mod h1:dJ2kqXpDDSZtoCVDtiymwtSysDwSjzP2P1vEwiwgHg8=
 github.com/Bullpeen/stox v0.0.0-20191214171355-5d431aabfeef h1:eWYtC4jqTzqvWXYBsL1h8XNCAxFR06HzHfW7H8CG6TU=
 github.com/Bullpeen/stox v0.0.0-20191214171355-5d431aabfeef/go.mod h1:lC/w4gpEDGAroUKfCJxQrQD4l0M3TbXeplNot76QOvc=
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
