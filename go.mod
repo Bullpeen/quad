@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/Bullpeen/infobot v0.0.0-20191214170509-b4e3681ba4e1
-	github.com/Bullpeen/slices v0.0.0-20191214170555-5d7fb423b365
+	github.com/Bullpeen/slices v0.0.0-20200327215130-4b6ba0ae949b
 	github.com/Bullpeen/stox v0.0.0-20191214171355-5d431aabfeef
 	github.com/cmckee-dev/go-alpha-vantage v0.0.0-20190315022515-f8ae72eef75c // indirect
 	github.com/jirwin/factpacks v0.0.1 // indirect
