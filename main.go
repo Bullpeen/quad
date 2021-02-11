@@ -111,7 +111,8 @@ func run(c *cli.Context) error {
 			"1079769536730140672": "politics-feed", // @RepRashida
 			"976366106561490944":  "artfolio",      // @DrawnDavidsOff
 			"921111554371682304":  "artfolio",      // @DrawnDavidson
-			"1581511":             "wwdc",          //@macrumorslive
+			"1581511":             "wwdc",          // @macrumorslive
+			"1340908679038525441": "covid-19",	// @vax_progress
 			//added for retweet testing
 			"778682": "quadlek-chat", // @jirwin
 
