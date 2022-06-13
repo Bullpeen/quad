@@ -28,7 +28,7 @@ require (
 	github.com/jirwin/comics v0.0.0-20180408212830-43822d8acb7c // indirect
 	github.com/jirwin/factpacks v0.0.1 // indirect
 	github.com/jirwin/gifs-quadlek v0.0.0-20180921045046-85bb51756261
-	github.com/jirwin/quadlek v0.0.0-20220613075226-f37f3cea0902
+	github.com/jirwin/quadlek v0.0.0-20220613085546-3ffd34f1f009
 	github.com/jirwin/xpost-quadlek v0.0.0-20190210050443-319004b8e32d
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/kr/pretty v0.3.0 // indirect

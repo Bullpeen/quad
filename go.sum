@@ -163,6 +163,10 @@ github.com/jirwin/quadlek v0.0.0-20220613073942-ea0530303ee1 h1:EOi8eys3KvGazHZ1
 github.com/jirwin/quadlek v0.0.0-20220613073942-ea0530303ee1/go.mod h1:xFaHEK/1io53DfnEnaPDEX1lCzTP/UQ1j/ya6sWLtWo=
 github.com/jirwin/quadlek v0.0.0-20220613075226-f37f3cea0902 h1:o6FDurHVF+8dbtJNTUwUVBRzDmxg9H2nIE53johcqbk=
 github.com/jirwin/quadlek v0.0.0-20220613075226-f37f3cea0902/go.mod h1:xFaHEK/1io53DfnEnaPDEX1lCzTP/UQ1j/ya6sWLtWo=
+github.com/jirwin/quadlek v0.0.0-20220613085119-9a3577a30c0e h1:ZCradZyOm+sJANVEQ2zXCPW3XoCNlNzhVgPGjthElzk=
+github.com/jirwin/quadlek v0.0.0-20220613085119-9a3577a30c0e/go.mod h1:xFaHEK/1io53DfnEnaPDEX1lCzTP/UQ1j/ya6sWLtWo=
+github.com/jirwin/quadlek v0.0.0-20220613085546-3ffd34f1f009 h1:Qakm4kzCCBGNHmSaE4qRZrDznQNJtdW17DTnF86DpRQ=
+github.com/jirwin/quadlek v0.0.0-20220613085546-3ffd34f1f009/go.mod h1:xFaHEK/1io53DfnEnaPDEX1lCzTP/UQ1j/ya6sWLtWo=
 github.com/jirwin/xpost-quadlek v0.0.0-20190210050443-319004b8e32d h1:OYTz6ORMMivaciOG0Y+JBi6GCaJWmobpDDRdpTeB+BM=
 github.com/jirwin/xpost-quadlek v0.0.0-20190210050443-319004b8e32d/go.mod h1:7oJB8bGr+HcxgLHyjREDP3wpCvkHZi2B6d0DF0Ka9xU=
 github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af/go.mod h1:Nht3zPeWKUH0NzdCt2Blrr5ys8VGpn0CEB0cQHVjt7k=
