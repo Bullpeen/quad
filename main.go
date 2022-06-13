@@ -14,7 +14,6 @@ import (
 	"github.com/Bullpeen/stox"
 	gifs "github.com/jirwin/gifs-quadlek/src"
 	"github.com/jirwin/quadlek/plugins/comics"
-	"github.com/jirwin/quadlek/plugins/echo"
 	"github.com/jirwin/quadlek/plugins/eslogs"
 	"github.com/jirwin/quadlek/plugins/karma"
 	"github.com/jirwin/quadlek/plugins/nextep"
@@ -52,12 +51,6 @@ func run(c *cli.Context) error {
 	bot, err := quadlek.NewBot(context.Background(), apiToken, verificationToken, dbPath)
 	if err != nil {
 		zap.L().Error("error creating bot", zap.Error(err))
-		return nil
-	}
-
-	err = bot.RegisterPlugin(echo.Register())
-	if err != nil {
-		fmt.Printf("error registering echo plugin: %s\n", err.Error())
 		return nil
 	}
 
@@ -112,7 +105,7 @@ func run(c *cli.Context) error {
 			"976366106561490944":  "artfolio",      // @DrawnDavidsOff
 			"921111554371682304":  "artfolio",      // @DrawnDavidson
 			"1581511":             "wwdc",          // @macrumorslive
-			"1340908679038525441": "covid-19",	// @vax_progress
+			"1340908679038525441": "covid-19",      // @vax_progress
 			//added for retweet testing
 			"778682": "quadlek-chat", // @jirwin
 
@@ -221,7 +214,7 @@ func run(c *cli.Context) error {
 		},
 	}
 
-	twitchPlugin := twitch.Register(c.String("twitch-oauth-client-id"), "", "https://quadlek.jirw.in/slack/plugin/twitch", false, twitchFollows)
+	twitchPlugin := twitch.Register(c.String("twitch-oauth-client-id"), "", "https://bullpeen-quadlek.quadlek.dev/slack/plugin/twitch", false, twitchFollows)
 	if twitchPlugin != nil {
 		err = bot.RegisterPlugin(twitchPlugin)
 		if err != nil {
