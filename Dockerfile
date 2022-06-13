@@ -1,4 +1,4 @@
-FROM golang:1.13-alpine as builder
+FROM golang:1.18-alpine as builder
 
 RUN apk add --update ca-certificates \
     && apk add curl git coreutils \
@@ -8,6 +8,7 @@ ENV APP_PATH=/quadlek
 RUN mkdir -p $APP_PATH
 ADD . $APP_PATH
 WORKDIR $APP_PATH
+RUN go mod vendor
 RUN go build -o /build/quadlekBot
 
 
