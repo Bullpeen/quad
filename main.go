@@ -165,6 +165,10 @@ func run(c *cli.Context) error {
 
 	stoxPlugin := stox.Register(c.String("av-key"))
 	err = bot.RegisterPlugin(stoxPlugin)
+	if err != nil {
+		fmt.Printf("Error registering stox plugin: %s\n", err.Error())
+		return err
+	}
 
 	gifPlugin := gifs.Register(c.String("giphy-api-key"))
 	err = bot.RegisterPlugin(gifPlugin)
