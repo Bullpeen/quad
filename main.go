@@ -29,7 +29,10 @@ func run(c *cli.Context) error {
 	if c.IsSet("api-key") {
 		apiToken = c.String("api-key")
 	} else {
-		cli.ShowAppHelp(c)
+		err := cli.ShowAppHelp(c)
+		if err != nil {
+			return err
+		}
 		return cli.NewExitError("Missing --api-key arg.", 1)
 	}
 
@@ -37,7 +40,10 @@ func run(c *cli.Context) error {
 	if c.IsSet("verification-token") {
 		verificationToken = c.String("verification-token")
 	} else {
-		cli.ShowAppHelp(c)
+		err := cli.ShowAppHelp(c)
+		if err != nil {
+			return err
+		}
 		return cli.NewExitError("Missing --verification-token arg.", 1)
 	}
 
@@ -346,5 +352,8 @@ func main() {
 		},
 	}
 
-	app.Run(os.Args)
+	err := app.Run(os.Args)
+	if err != nil {
+		return
+	}
 }
