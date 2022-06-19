@@ -157,14 +157,6 @@ github.com/jirwin/factpacks v0.0.1 h1:UcJUfddVEOla5rdNisSLOZkGJpkjF0Y/a0LUy5K8UB
 github.com/jirwin/factpacks v0.0.1/go.mod h1:SUxD6ulZUeelQfLxSvO3XmLb8WyN9tu35QkXe6vQfTw=
 github.com/jirwin/gifs-quadlek v0.0.0-20180921045046-85bb51756261 h1:G/kM3L+bi7zlkXfT1N+LRxL3NNp0FV6Oo0jEgg95r7E=
 github.com/jirwin/gifs-quadlek v0.0.0-20180921045046-85bb51756261/go.mod h1:Bf+9e+qPWdduZqqc+DxHvN8boM6yIfBuz2SiUf/c6yw=
-github.com/jirwin/quadlek v0.0.0-20220613070409-897fc18efb55 h1:dRqaQEApPizRWqgVRFSryzIJ5QfKPUwUfxxZ+CfZbM4=
-github.com/jirwin/quadlek v0.0.0-20220613070409-897fc18efb55/go.mod h1:xFaHEK/1io53DfnEnaPDEX1lCzTP/UQ1j/ya6sWLtWo=
-github.com/jirwin/quadlek v0.0.0-20220613073942-ea0530303ee1 h1:EOi8eys3KvGazHZ1UZM//58sVfvhj1eY5iOwv11uVFg=
-github.com/jirwin/quadlek v0.0.0-20220613073942-ea0530303ee1/go.mod h1:xFaHEK/1io53DfnEnaPDEX1lCzTP/UQ1j/ya6sWLtWo=
-github.com/jirwin/quadlek v0.0.0-20220613075226-f37f3cea0902 h1:o6FDurHVF+8dbtJNTUwUVBRzDmxg9H2nIE53johcqbk=
-github.com/jirwin/quadlek v0.0.0-20220613075226-f37f3cea0902/go.mod h1:xFaHEK/1io53DfnEnaPDEX1lCzTP/UQ1j/ya6sWLtWo=
-github.com/jirwin/quadlek v0.0.0-20220613085119-9a3577a30c0e h1:ZCradZyOm+sJANVEQ2zXCPW3XoCNlNzhVgPGjthElzk=
-github.com/jirwin/quadlek v0.0.0-20220613085119-9a3577a30c0e/go.mod h1:xFaHEK/1io53DfnEnaPDEX1lCzTP/UQ1j/ya6sWLtWo=
 github.com/jirwin/quadlek v0.0.0-20220613085546-3ffd34f1f009 h1:Qakm4kzCCBGNHmSaE4qRZrDznQNJtdW17DTnF86DpRQ=
 github.com/jirwin/quadlek v0.0.0-20220613085546-3ffd34f1f009/go.mod h1:xFaHEK/1io53DfnEnaPDEX1lCzTP/UQ1j/ya6sWLtWo=
 github.com/jirwin/xpost-quadlek v0.0.0-20190210050443-319004b8e32d h1:OYTz6ORMMivaciOG0Y+JBi6GCaJWmobpDDRdpTeB+BM=

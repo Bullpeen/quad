@@ -10,20 +10,15 @@ import (
 	"go.uber.org/zap"
 
 	"github.com/Bullpeen/infobot"
-	"github.com/Bullpeen/slices"
 	"github.com/Bullpeen/stox"
 	gifs "github.com/jirwin/gifs-quadlek/src"
 	"github.com/jirwin/quadlek/plugins/comics"
-	"github.com/jirwin/quadlek/plugins/eslogs"
 	"github.com/jirwin/quadlek/plugins/karma"
-	"github.com/jirwin/quadlek/plugins/nextep"
 	"github.com/jirwin/quadlek/plugins/random"
 	"github.com/jirwin/quadlek/plugins/spotify"
 	"github.com/jirwin/quadlek/plugins/twitter"
 	"github.com/jirwin/quadlek/quadlek"
 
-	"github.com/morgabra/cointip/quadlek"
-	twitch "github.com/morgabra/libtwitch/quadlek"
 	"github.com/urfave/cli"
 )
 
@@ -72,15 +67,16 @@ func run(c *cli.Context) error {
 		return nil
 	}
 
-	if c.IsSet("tvdb-key") {
-		tvdbKey := c.String("tvdb-key")
-
-		err = bot.RegisterPlugin(nextep.Register(tvdbKey))
-		if err != nil {
-			fmt.Printf("error registering nextep plugin: %s\n", err.Error())
-			return nil
-		}
-	}
+	// TVDB not working
+	//if c.IsSet("tvdb-key") {
+	//	tvdbKey := c.String("tvdb-key")
+	//
+	//	err = bot.RegisterPlugin(nextep.Register(tvdbKey))
+	//	if err != nil {
+	//		fmt.Printf("error registering nextep plugin: %s\n", err.Error())
+	//		return nil
+	//	}
+	//}
 
 	err = bot.RegisterPlugin(infobot.Register())
 	if err != nil {
@@ -95,34 +91,41 @@ func run(c *cli.Context) error {
 		c.String("twitter-access-secret"),
 		// These must be twitter user ids, not names. https://tweeterid.com/ for easy conversion between the two.
 		map[string]string{
-			"25073877":            "politics-feed", // @realDonaldTrump
-			"830896623689547776":  "politics-feed", // @PresVillain
-			"934474767645724672":  "politics-feed", // @realtrumpweathr
-			"138203134":           "politics-feed", // @AOC
-			"783792992":           "politics-feed", // @IlhanMN
-			"31013444":            "politics-feed", // @AyannaPressley
-			"1079769536730140672": "politics-feed", // @RepRashida
-			"976366106561490944":  "artfolio",      // @DrawnDavidsOff
-			"921111554371682304":  "artfolio",      // @DrawnDavidson
-			"1581511":             "wwdc",          // @macrumorslive
-			"1340908679038525441": "covid-19",      // @vax_progress
+			"138203134":           "politics-feed",  // @AOC
+			"783792992":           "politics-feed",  // @IlhanMN
+			"31013444":            "politics-feed",  // @AyannaPressley
+			"1079769536730140672": "politics-feed",  // @RepRashida
+			"1081222837459996672": "politics-feed",  // @RepKatiePorter
+			"151444950":           "politics-feed",  // @DaviSusan
+			"2315512764":          "politics-feed",  // @bellingcat
+			"976366106561490944":  "artfolio",       // @DrawnDavidsOff
+			"921111554371682304":  "artfolio",       // @DrawnDavidson
+			"1581511":             "wwdc",           // @macrumorslive
+			"29472803":            "final-frontier", // @NASAWebb
+			"17217640":            "final-frontier", // @SpaceFlightNow
+			"14091091":            "final-frontier", // @NASAHubble
+			"18831926":            "covid19-feed",   // @DrEricDing
+			"88589013":            "covid19-feed",   //@fitterhappierAJ
+			"920943710254313472":  "covid19-feed",   //@dgurdasani1
+			"29431996":            "covid19-feed",   //@patricklsimpson
+
 			//added for retweet testing
 			"778682": "quadlek-chat", // @jirwin
 
 		},
 	))
 
-	coinbasePlugin := cointip.Register(
-		c.String("coinbase-key"),
-		c.String("coinbase-secret"),
-		c.String("coinbase-account"),
-	)
-	if coinbasePlugin != nil {
-		err = bot.RegisterPlugin(coinbasePlugin)
-		if err != nil {
-			panic(err)
-		}
-	}
+	//coinbasePlugin := cointip.Register(
+	//	c.String("coinbase-key"),
+	//	c.String("coinbase-secret"),
+	//	c.String("coinbase-account"),
+	//)
+	//if coinbasePlugin != nil {
+	//	err = bot.RegisterPlugin(coinbasePlugin)
+	//	if err != nil {
+	//		panic(err)
+	//	}
+	//}
 
 	err = bot.RegisterPlugin(comics.Register(
 		c.String("imgur-client-id"),
@@ -132,16 +135,16 @@ func run(c *cli.Context) error {
 		fmt.Printf("error registering comic plugin: %s\n", err.Error())
 		return err
 	}
-	esPlugin, err := eslogs.Register(c.String("es-endpoint"), c.String("es-index"))
-	if err != nil {
-		fmt.Printf("Error creating eslogs plugin: %s\n", err.Error())
-		return err
-	}
-	err = bot.RegisterPlugin(esPlugin)
-	if err != nil {
-		fmt.Printf("Error registering eslogs plugin: %s\n", err.Error())
-		return err
-	}
+	//esPlugin, err := eslogs.Register(c.String("es-endpoint"), c.String("es-index"))
+	//if err != nil {
+	//	fmt.Printf("Error creating eslogs plugin: %s\n", err.Error())
+	//	return err
+	//}
+	//err = bot.RegisterPlugin(esPlugin)
+	//if err != nil {
+	//	fmt.Printf("Error registering eslogs plugin: %s\n", err.Error())
+	//	return err
+	//}
 
 	xpostPlugin := xpost.Register()
 	err = bot.RegisterPlugin(xpostPlugin)
@@ -164,78 +167,79 @@ func run(c *cli.Context) error {
 		return err
 	}
 
-	twitchFollows := []*twitch.TwitchFollow{
-		{
-			SlackChannels: []string{"kitboga"},
-			TwitchUser:    "kitboga",
-			WatchStream:   true,
-		},
-		{
-			SlackChannels: []string{"vidyagames"},
-			TwitchUser:    "telewyn",
-			SlackUser:     "telewyn",
-			WatchStream:   true,
-			WatchFollows:  true,
-		},
-		{
-			SlackChannels: []string{"vidyagames"},
-			TwitchUser:    "khryo72",
-			SlackUser:     "morgabra",
-			WatchStream:   true,
-			WatchFollows:  true,
-		},
-		{
-			SlackChannels: []string{"vidyagames"},
-			TwitchUser:    "mekilek",
-			SlackUser:     "jirwin",
-			WatchStream:   true,
-			WatchFollows:  true,
-		},
-		{
-			SlackChannels: []string{"vidyagames"},
-			TwitchUser:    "sonicdm",
-			SlackUser:     "sonicdm",
-			WatchStream:   true,
-			WatchFollows:  true,
-		},
-		{
-			SlackChannels: []string{"vidyagames"},
-			TwitchUser:    "sakatana",
-			SlackUser:     "saka",
-			WatchStream:   true,
-			WatchFollows:  true,
-		},
-		{
-			SlackChannels: []string{"vidyagames"},
-			TwitchUser:    "pountaar",
-			SlackUser:     "purdyk",
-			WatchStream:   true,
-			WatchFollows:  true,
-		},
-	}
+	// Twitch not working
+	//twitchFollows := []*twitch.TwitchFollow{
+	//	{
+	//		SlackChannels: []string{"kitboga"},
+	//		TwitchUser:    "kitboga",
+	//		WatchStream:   true,
+	//	},
+	//	{
+	//		SlackChannels: []string{"vidyagames"},
+	//		TwitchUser:    "telewyn",
+	//		SlackUser:     "telewyn",
+	//		WatchStream:   true,
+	//		WatchFollows:  true,
+	//	},
+	//	{
+	//		SlackChannels: []string{"vidyagames"},
+	//		TwitchUser:    "khryo72",
+	//		SlackUser:     "morgabra",
+	//		WatchStream:   true,
+	//		WatchFollows:  true,
+	//	},
+	//	{
+	//		SlackChannels: []string{"vidyagames"},
+	//		TwitchUser:    "mekilek",
+	//		SlackUser:     "jirwin",
+	//		WatchStream:   true,
+	//		WatchFollows:  true,
+	//	},
+	//	{
+	//		SlackChannels: []string{"vidyagames"},
+	//		TwitchUser:    "sonicdm",
+	//		SlackUser:     "sonicdm",
+	//		WatchStream:   true,
+	//		WatchFollows:  true,
+	//	},
+	//	{
+	//		SlackChannels: []string{"vidyagames"},
+	//		TwitchUser:    "sakatana",
+	//		SlackUser:     "saka",
+	//		WatchStream:   true,
+	//		WatchFollows:  true,
+	//	},
+	//	{
+	//		SlackChannels: []string{"vidyagames"},
+	//		TwitchUser:    "pountaar",
+	//		SlackUser:     "purdyk",
+	//		WatchStream:   true,
+	//		WatchFollows:  true,
+	//	},
+	//}
 
-	twitchPlugin := twitch.Register(c.String("twitch-oauth-client-id"), "", "https://bullpeen-quadlek.quadlek.dev/slack/plugin/twitch", false, twitchFollows)
-	if twitchPlugin != nil {
-		err = bot.RegisterPlugin(twitchPlugin)
-		if err != nil {
-			fmt.Printf("error registering twitch plugin: %s\n", err.Error())
-			return err
-		}
-	}
-
-	err = bot.RegisterPlugin(slices.Register([]string{
-		"76561197980107683", // sonicdm
-		"76561197976367183", // morgabra
-		"76561198057633471", // greenjeans
-		"76561198002272597", // newsomr
-		"76561197974723967", // purdyk
-		"1967806609958425",  // bh
-		"1964439323566513",  // schonstal
-	}))
-	if err != nil {
-		fmt.Printf("error registering slices plugin: %s\n", err.Error())
-		return nil
-	}
+	//twitchPlugin := twitch.Register(c.String("twitch-oauth-client-id"), "", "https://bullpeen-quadlek.quadlek.dev/slack/plugin/twitch", false, twitchFollows)
+	//if twitchPlugin != nil {
+	//	err = bot.RegisterPlugin(twitchPlugin)
+	//	if err != nil {
+	//		fmt.Printf("error registering twitch plugin: %s\n", err.Error())
+	//		return err
+	//	}
+	//}
+	//
+	//err = bot.RegisterPlugin(slices.Register([]string{
+	//	"76561197980107683", // sonicdm
+	//	"76561197976367183", // morgabra
+	//	"76561198057633471", // greenjeans
+	//	"76561198002272597", // newsomr
+	//	"76561197974723967", // purdyk
+	//	"1967806609958425",  // bh
+	//	"1964439323566513",  // schonstal
+	//}))
+	//if err != nil {
+	//	fmt.Printf("error registering slices plugin: %s\n", err.Error())
+	//	return nil
+	//}
 
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
