@@ -354,6 +354,7 @@ func main() {
 
 	err := app.Run(os.Args)
 	if err != nil {
-		return
+		zap.L().Error("error while running quad", zap.Error(err))
+		os.Exit(1)
 	}
 }
