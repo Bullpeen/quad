@@ -52,25 +52,25 @@ func run(c *cli.Context) error {
 	bot, err := quadlek.NewBot(context.Background(), apiToken, verificationToken, dbPath)
 	if err != nil {
 		zap.L().Error("error creating bot", zap.Error(err))
-		return nil
+		return err
 	}
 
 	err = bot.RegisterPlugin(karma.Register())
 	if err != nil {
-		fmt.Printf("error registering karma plugin: %s\n", err.Error())
-		return nil
+		zap.L().Error("error registering karma plugin", zap.Error(err))
+		return err
 	}
 
 	err = bot.RegisterPlugin(random.Register())
 	if err != nil {
-		fmt.Printf("error registering random plugin: %s\n", err.Error())
-		return nil
+		zap.L().Error("error registering random plugin", zap.Error(err))
+		return err
 	}
 
 	err = bot.RegisterPlugin(spotify.Register())
 	if err != nil {
-		fmt.Printf("error registering spotify plugin: %s\n", err.Error())
-		return nil
+		zap.L().Error("error registering spotify plugin", zap.Error(err))
+		return err
 	}
 
 	// TVDB not working
@@ -86,8 +86,8 @@ func run(c *cli.Context) error {
 
 	err = bot.RegisterPlugin(infobot.Register())
 	if err != nil {
-		fmt.Printf("error registering infobot plugin: %s\n", err.Error())
-		return nil
+		zap.L().Error("error registering infobot plugin", zap.Error(err))
+		return err
 	}
 
 	err = bot.RegisterPlugin(twitter.Register(
@@ -121,8 +121,8 @@ func run(c *cli.Context) error {
 		},
 	))
 	if err != nil {
-		fmt.Println("error configuring twitter plugin: %s", err.Error())
-		return nil
+		zap.L().Error("error configuring twitter plugin", zap.Error(err))
+		return err
 	}
 
 	//coinbasePlugin := cointip.Register(
