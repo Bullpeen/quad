@@ -120,6 +120,10 @@ func run(c *cli.Context) error {
 
 		},
 	))
+	if err != nil {
+		fmt.Println("error configuring twitter plugin: %s", err.Error())
+		return nil
+	}
 
 	//coinbasePlugin := cointip.Register(
 	//	c.String("coinbase-key"),
