@@ -8,8 +8,7 @@ ENV APP_PATH=/quadlek
 RUN mkdir -p $APP_PATH
 ADD . $APP_PATH
 WORKDIR $APP_PATH
-RUN go mod vendor
-RUN go build -o /build/quadlekBot
+RUN go build -mod=vendor -o /build/quadlekBot
 
 
 FROM alpine
