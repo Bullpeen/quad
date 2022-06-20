@@ -12,12 +12,14 @@ RUN go build -mod=vendor -o /build/quadlekBot
 
 
 FROM alpine
-
+ARG COMMIT=""
+LABEL commit=${COMMIT}
 RUN apk add --no-cache ca-certificates
 
 COPY --from=builder /build/quadlekBot /
 ADD assets /opt/quad-assets
 
 EXPOSE 8000
+ENV COMMIT_SHA=${COMMIT}
 
 ENTRYPOINT ["/quadlekBot"]
