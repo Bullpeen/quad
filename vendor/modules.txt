@@ -1,6 +1,6 @@
 # github.com/Bullpeen/infobot v0.0.0-20191214170509-b4e3681ba4e1
 github.com/Bullpeen/infobot
-# github.com/Bullpeen/stox v0.0.0-20191214171355-5d431aabfeef
+# github.com/Bullpeen/stox v0.0.0-20220620191301-3f1d83fa209f
 github.com/Bullpeen/stox
 # github.com/boltdb/bolt v1.3.1
 github.com/boltdb/bolt
@@ -35,18 +35,19 @@ github.com/gorilla/websocket
 github.com/jirwin/comics/src/comics
 # github.com/jirwin/factpacks v0.0.1
 github.com/jirwin/factpacks
-# github.com/jirwin/gifs-quadlek v0.0.0-20220620083533-f84367d2dbab
+# github.com/jirwin/gifs-quadlek v0.0.0-20220620184919-e210dec3a816
 github.com/jirwin/gifs-quadlek/src
-# github.com/jirwin/quadlek v0.0.0-20220620175107-e109b8001e49
+# github.com/jirwin/quadlek v0.0.0-20220620184257-e4469d53e60e
 github.com/jirwin/quadlek/pb/quadlek/plugins/comics/v1
 github.com/jirwin/quadlek/pb/quadlek/plugins/spotify/v1
+github.com/jirwin/quadlek/plugins/admin
 github.com/jirwin/quadlek/plugins/comics
 github.com/jirwin/quadlek/plugins/karma
 github.com/jirwin/quadlek/plugins/random
 github.com/jirwin/quadlek/plugins/spotify
 github.com/jirwin/quadlek/plugins/twitter
 github.com/jirwin/quadlek/quadlek
-# github.com/jirwin/xpost-quadlek v0.0.0-20190210050443-319004b8e32d
+# github.com/jirwin/xpost-quadlek v0.0.0-20220620185145-37d0eebdf364
 github.com/jirwin/xpost-quadlek/pkg
 # github.com/mattn/go-scan v0.0.0-20200228002420-2250e6e52487
 github.com/mattn/go-scan

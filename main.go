@@ -12,6 +12,7 @@ import (
 	"github.com/Bullpeen/infobot"
 	"github.com/Bullpeen/stox"
 	gifs "github.com/jirwin/gifs-quadlek/src"
+	"github.com/jirwin/quadlek/plugins/admin"
 	"github.com/jirwin/quadlek/plugins/comics"
 	"github.com/jirwin/quadlek/plugins/karma"
 	"github.com/jirwin/quadlek/plugins/random"
@@ -250,6 +251,12 @@ func run(c *cli.Context) error {
 	//	fmt.Printf("error registering slices plugin: %s\n", err.Error())
 	//	return nil
 	//}
+
+	err = bot.RegisterPlugin(admin.Register())
+	if err != nil {
+		fmt.Printf("error registering admin plugin: %s\n", err.Error())
+		return nil
+	}
 
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
