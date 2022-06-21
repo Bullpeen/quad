@@ -11,9 +11,9 @@ import (
 
 	"github.com/Bullpeen/infobot"
 	"github.com/Bullpeen/stox"
-	gifs "github.com/jirwin/gifs-quadlek/src"
 	"github.com/jirwin/quadlek/plugins/admin"
 	"github.com/jirwin/quadlek/plugins/comics"
+	"github.com/jirwin/quadlek/plugins/gifs"
 	"github.com/jirwin/quadlek/plugins/karma"
 	"github.com/jirwin/quadlek/plugins/random"
 	"github.com/jirwin/quadlek/plugins/spotify"
