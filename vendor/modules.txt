@@ -8,7 +8,7 @@ github.com/boltdb/bolt
 github.com/cenkalti/backoff/v4
 # github.com/cmckee-dev/go-alpha-vantage v0.0.0-20190315022515-f8ae72eef75c
 github.com/cmckee-dev/go-alpha-vantage
-# github.com/cpuguy83/go-md2man/v2 v2.0.2
+# github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d
 github.com/cpuguy83/go-md2man/v2/md2man
 # github.com/dghubble/go-twitter v0.0.0-20220608135633-47eb18e5aab5
 github.com/dghubble/go-twitter/twitter
@@ -35,13 +35,12 @@ github.com/gorilla/websocket
 github.com/jirwin/comics/src/comics
 # github.com/jirwin/factpacks v0.0.1
 github.com/jirwin/factpacks
-# github.com/jirwin/gifs-quadlek v0.0.0-20220620184919-e210dec3a816
-github.com/jirwin/gifs-quadlek/src
-# github.com/jirwin/quadlek v0.0.0-20220620184257-e4469d53e60e
+# github.com/jirwin/quadlek v0.0.0-20220621061816-54fcce25b72c
 github.com/jirwin/quadlek/pb/quadlek/plugins/comics/v1
 github.com/jirwin/quadlek/pb/quadlek/plugins/spotify/v1
 github.com/jirwin/quadlek/plugins/admin
 github.com/jirwin/quadlek/plugins/comics
+github.com/jirwin/quadlek/plugins/gifs
 github.com/jirwin/quadlek/plugins/karma
 github.com/jirwin/quadlek/plugins/random
 github.com/jirwin/quadlek/plugins/spotify
@@ -55,10 +54,12 @@ github.com/mattn/go-scan
 github.com/peterhellberg/giphy
 # github.com/pkg/errors v0.9.1
 github.com/pkg/errors
-# github.com/russross/blackfriday/v2 v2.1.0
+# github.com/russross/blackfriday/v2 v2.0.1
 github.com/russross/blackfriday/v2
 # github.com/satori/go.uuid v1.2.0
 github.com/satori/go.uuid
+# github.com/shurcooL/sanitized_anchor_name v1.0.0
+github.com/shurcooL/sanitized_anchor_name
 # github.com/sirupsen/logrus v1.8.1
 github.com/sirupsen/logrus
 # github.com/slack-go/slack v0.11.0
