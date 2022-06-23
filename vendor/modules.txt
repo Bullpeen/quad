@@ -1,4 +1,4 @@
-# github.com/Bullpeen/infobot v0.0.0-20191214170509-b4e3681ba4e1
+# github.com/Bullpeen/infobot v0.0.0-20220620191004-6c66c721b4c6
 github.com/Bullpeen/infobot
 # github.com/Bullpeen/stox v0.0.0-20220620191301-3f1d83fa209f
 github.com/Bullpeen/stox
@@ -8,9 +8,9 @@ github.com/boltdb/bolt
 github.com/cenkalti/backoff/v4
 # github.com/cmckee-dev/go-alpha-vantage v0.0.0-20190315022515-f8ae72eef75c
 github.com/cmckee-dev/go-alpha-vantage
-# github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d
+# github.com/cpuguy83/go-md2man/v2 v2.0.2
 github.com/cpuguy83/go-md2man/v2/md2man
-# github.com/dghubble/go-twitter v0.0.0-20220608135633-47eb18e5aab5
+# github.com/dghubble/go-twitter v0.0.0-20220621150516-b9b1581459a3
 github.com/dghubble/go-twitter/twitter
 # github.com/dghubble/oauth1 v0.7.1
 github.com/dghubble/oauth1
@@ -35,8 +35,9 @@ github.com/gorilla/websocket
 github.com/jirwin/comics/src/comics
 # github.com/jirwin/factpacks v0.0.1
 github.com/jirwin/factpacks
-# github.com/jirwin/quadlek v0.0.0-20220621061816-54fcce25b72c
+# github.com/jirwin/quadlek v0.0.0-20220623000742-149e40607590
 github.com/jirwin/quadlek/pb/quadlek/plugins/comics/v1
+github.com/jirwin/quadlek/pb/quadlek/plugins/gifs/v1
 github.com/jirwin/quadlek/pb/quadlek/plugins/spotify/v1
 github.com/jirwin/quadlek/plugins/admin
 github.com/jirwin/quadlek/plugins/comics
@@ -54,12 +55,12 @@ github.com/mattn/go-scan
 github.com/peterhellberg/giphy
 # github.com/pkg/errors v0.9.1
 github.com/pkg/errors
-# github.com/russross/blackfriday/v2 v2.0.1
+# github.com/russross/blackfriday/v2 v2.1.0
 github.com/russross/blackfriday/v2
 # github.com/satori/go.uuid v1.2.0
 github.com/satori/go.uuid
-# github.com/shurcooL/sanitized_anchor_name v1.0.0
-github.com/shurcooL/sanitized_anchor_name
+# github.com/segmentio/fasthash v1.0.3
+github.com/segmentio/fasthash/fnv1a
 # github.com/sirupsen/logrus v1.8.1
 github.com/sirupsen/logrus
 # github.com/slack-go/slack v0.11.0
@@ -90,13 +91,13 @@ golang.org/x/image/font
 golang.org/x/image/font/basicfont
 golang.org/x/image/math/f64
 golang.org/x/image/math/fixed
-# golang.org/x/net v0.0.0-20220617184016-355a448f1bc9
+# golang.org/x/net v0.0.0-20220622184535-263ec571b305
 golang.org/x/net/context
 golang.org/x/net/context/ctxhttp
-# golang.org/x/oauth2 v0.0.0-20220608161450-d0670ef3b1eb
+# golang.org/x/oauth2 v0.0.0-20220622183110-fd043fe589d2
 golang.org/x/oauth2
 golang.org/x/oauth2/internal
-# golang.org/x/sys v0.0.0-20220615213510-4f61da869c0c
+# golang.org/x/sys v0.0.0-20220622161953-175b2fd9d664
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
 golang.org/x/sys/windows
