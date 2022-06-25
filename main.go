@@ -258,6 +258,12 @@ func run(c *cli.Context) error {
 		return nil
 	}
 
+	err = bot.RegisterPlugin(admin.RegisterInteraction())
+	if err != nil {
+		fmt.Printf("error registering admin interaction plugin: %s\n", err.Error())
+		return nil
+	}
+
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
 
