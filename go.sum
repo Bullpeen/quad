@@ -154,8 +154,8 @@ github.com/jirwin/comics v0.0.0-20180408212830-43822d8acb7c/go.mod h1:TSVIgA8nw2
 github.com/jirwin/factpacks v0.0.1 h1:UcJUfddVEOla5rdNisSLOZkGJpkjF0Y/a0LUy5K8UBg=
 github.com/jirwin/factpacks v0.0.1/go.mod h1:SUxD6ulZUeelQfLxSvO3XmLb8WyN9tu35QkXe6vQfTw=
 github.com/jirwin/quadlek v0.0.0-20220620184257-e4469d53e60e/go.mod h1:MnKu+N44zWjxudf8hbAtRL7v7nsmmm0mdDyB8ouNmWA=
-github.com/jirwin/quadlek v0.0.0-20220625012408-c9151982dab7 h1:e7V1hVc2BAKhqaImjeBMjvieq+uhfMvEt6SnoScwhkM=
-github.com/jirwin/quadlek v0.0.0-20220625012408-c9151982dab7/go.mod h1:tg9vugubHkUeffgHssqnCQL9dSn+7VzDVdrh/iHDr9s=
+github.com/jirwin/quadlek v0.0.0-20220625014306-36e28d158976 h1:j0MEe016YtOLCzcxwvpWvTVEwpo1tywt/Gu+W8yd2kQ=
+github.com/jirwin/quadlek v0.0.0-20220625014306-36e28d158976/go.mod h1:tg9vugubHkUeffgHssqnCQL9dSn+7VzDVdrh/iHDr9s=
 github.com/jirwin/xpost-quadlek v0.0.0-20220620185145-37d0eebdf364 h1:m9QKVxZMu92cdbwfRJGBsp8bn2XkL0aDv7s8u6VJptc=
 github.com/jirwin/xpost-quadlek v0.0.0-20220620185145-37d0eebdf364/go.mod h1:Mkbx7W02VA9f7XIOAhN0N56++AnB1vm6beMrchRbmMw=
 github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af/go.mod h1:Nht3zPeWKUH0NzdCt2Blrr5ys8VGpn0CEB0cQHVjt7k=
