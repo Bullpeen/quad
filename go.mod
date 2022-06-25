@@ -10,8 +10,7 @@ require (
 	github.com/dghubble/go-twitter v0.0.0-20220621150516-b9b1581459a3 // indirect
 	github.com/go-test/deep v1.0.8 // indirect
 	github.com/google/go-cmp v0.5.8 // indirect
-	github.com/jirwin/factpacks v0.0.1 // indirect
-	github.com/jirwin/quadlek v0.0.0-20220623000742-149e40607590
+	github.com/jirwin/quadlek v0.0.0-20220625012408-c9151982dab7
 	github.com/jirwin/xpost-quadlek v0.0.0-20220620185145-37d0eebdf364
 	github.com/kr/pretty v0.3.0 // indirect
 	github.com/rogpeppe/go-internal v1.8.1 // indirect
