@@ -35,7 +35,7 @@ github.com/gorilla/websocket
 github.com/jirwin/comics/src/comics
 # github.com/jirwin/factpacks v0.0.1
 github.com/jirwin/factpacks
-# github.com/jirwin/quadlek v0.0.0-20220625012408-c9151982dab7
+# github.com/jirwin/quadlek v0.0.0-20220625014306-36e28d158976
 github.com/jirwin/quadlek/pb/quadlek/plugins/comics/v1
 github.com/jirwin/quadlek/pb/quadlek/plugins/gifs/v1
 github.com/jirwin/quadlek/pb/quadlek/plugins/spotify/v1
