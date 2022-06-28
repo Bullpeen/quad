@@ -109,7 +109,6 @@ func run(c *cli.Context) error {
 			"921111554371682304":  "artfolio",       // @DrawnDavidson
 			"1581511":             "wwdc",           // @macrumorslive
 			"29472803":            "final-frontier", // @NASAWebb
-			"17217640":            "final-frontier", // @SpaceFlightNow
 			"14091091":            "final-frontier", // @NASAHubble
 			"18831926":            "covid19-feed",   // @DrEricDing
 			"88589013":            "covid19-feed",   //@fitterhappierAJ
