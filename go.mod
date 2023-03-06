@@ -17,10 +17,8 @@ require (
 	github.com/urfave/cli v1.22.9
 	go.uber.org/goleak v1.1.12 // indirect
 	go.uber.org/zap v1.21.0
-	golang.org/x/image v0.0.0-20220617043117-41969df76e82 // indirect
-	golang.org/x/net v0.0.0-20220622184535-263ec571b305 // indirect
+	golang.org/x/image v0.5.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20220622183110-fd043fe589d2 // indirect
-	golang.org/x/sys v0.0.0-20220622161953-175b2fd9d664 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
